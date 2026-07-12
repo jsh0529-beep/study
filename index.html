@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>하준이의 지구 탐험대 🌍</title>
+<!-- SNS 공유 썸네일 -->
+<meta property="og:title" content="하준이의 지구 탐험대 🌍">
+<meta property="og:description" content="적도·위도·경도·북반구·남반구·본초자오선, 초등 6학년 지리 개념 학습 + 10문제 퀴즈!">
+<meta property="og:image" content="https://jsh0529-beep.github.io/study/cover.png">
+<meta property="og:url" content="https://jsh0529-beep.github.io/study/">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky:#EAF6FF; --ocean:#1E6FB8; --ocean-light:#4FA3E3; --land:#58B368;
+  --navy:#14375A; --sun:#FFC93C; --coral:#FF7B54; --white:#FFFFFF;
+  --line-red:#E84545; --line-purple:#7C4DFF;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Gowun Dodum',sans-serif;background:linear-gradient(180deg,#D9EFFF 0%,#EAF6FF 60%,#F5FBFF 100%);color:var(--navy);min-height:100vh}
+h1,h2,h3,.jua{font-family:'Jua',sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+header{padding:8px 0 4px}
+.cover{border:3px solid var(--navy);border-radius:22px;overflow:hidden;box-shadow:0 6px 0 rgba(20,55,90,.15);line-height:0}
+.cover svg{width:100%;height:auto;display:block}
+.tabs{display:flex;gap:8px;justify-content:center;margin:20px 0}
+.tab-btn{font-family:'Jua',sans-serif;font-size:1.05rem;padding:10px 22px;border:3px solid var(--navy);border-radius:999px;background:var(--white);color:var(--navy);cursor:pointer;transition:.15s}
+.tab-btn.active{background:var(--sun);transform:translateY(-2px);box-shadow:0 4px 0 var(--navy)}
+.tab-btn:focus-visible{outline:3px dashed var(--ocean);outline-offset:3px}
+.card{background:var(--white);border:3px solid var(--navy);border-radius:22px;padding:22px;margin-bottom:18px;box-shadow:0 6px 0 rgba(20,55,90,.15)}
+.concept-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{font-family:'Jua',sans-serif;padding:8px 14px;border:2px solid var(--navy);border-radius:999px;background:#F0F7FF;cursor:pointer;font-size:.95rem}
+.chip.on{background:var(--ocean-light);color:#fff}
+.concept h2{font-size:1.5rem;margin-bottom:4px}
+.concept .easy{background:#FFF6DC;border:2px dashed var(--sun);border-radius:14px;padding:12px 14px;margin:12px 0;font-size:1.02rem;line-height:1.7}
+.concept p{line-height:1.75;font-size:1rem;margin:8px 0}
+.globe-box{display:flex;justify-content:center;margin:14px 0}
+.quiz-info{background:#EFFAF1;border:2px solid var(--land);border-radius:14px;padding:14px;margin-bottom:14px;line-height:1.7}
+.reward-table{width:100%;border-collapse:collapse;margin-top:10px}
+.reward-table th,.reward-table td{border:2px solid var(--navy);padding:9px 8px;text-align:center;font-size:.95rem}
+.reward-table th{background:var(--sun);font-family:'Jua',sans-serif}
+.reward-table tr.good td{background:#EFFAF1}
+.reward-table tr.retry td{background:#FFF0EC}
+.start-btn,.next-btn,.retry-btn{display:block;width:100%;font-family:'Jua',sans-serif;font-size:1.2rem;padding:14px;border:3px solid var(--navy);border-radius:16px;background:var(--sun);cursor:pointer;box-shadow:0 5px 0 var(--navy);transition:.12s;color:var(--navy)}
+.start-btn:active,.next-btn:active,.retry-btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--navy)}
+.progress{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.progress .bar{flex:1;height:14px;background:#DCEBFA;border:2px solid var(--navy);border-radius:999px;overflow:hidden}
+.progress .fill{height:100%;background:var(--land);width:0%;transition:.3s}
+.progress .label{font-family:'Jua',sans-serif}
+.q-text{font-family:'Jua',sans-serif;font-size:1.25rem;line-height:1.5;margin-bottom:16px}
+.opts{display:grid;gap:10px}
+.opt{font-size:1.02rem;text-align:left;padding:13px 16px;border:2px solid var(--navy);border-radius:14px;background:#F5FAFF;cursor:pointer;transition:.12s;font-family:'Gowun Dodum',sans-serif;color:var(--navy)}
+.opt:hover{background:#E3F1FF}
+.opt.correct{background:#C9F0D2;border-color:var(--land);font-weight:bold}
+.opt.wrong{background:#FFD9CC;border-color:var(--coral)}
+.opt:disabled{cursor:default}
+.feedback{margin-top:14px;padding:12px 14px;border-radius:12px;font-size:1rem;line-height:1.6;display:none}
+.feedback.show{display:block}
+.feedback.ok{background:#EFFAF1;border:2px solid var(--land)}
+.feedback.no{background:#FFF0EC;border:2px solid var(--coral)}
+.hidden{display:none}
+.score-big{font-family:'Jua',sans-serif;font-size:3.4rem;text-align:center;margin:8px 0}
+.score-msg{text-align:center;font-size:1.15rem;line-height:1.7}
+.reward-banner{margin:18px 0;padding:18px;border-radius:18px;border:3px solid var(--navy);text-align:center;font-family:'Jua',sans-serif;font-size:1.3rem;line-height:1.6}
+.reward-banner.tier1{background:#C9F0D2}
+.reward-banner.tier2{background:#FFF1BF}
+.reward-banner.tier3{background:#DCEBFA}
+.reward-banner.tier4{background:#FFE1D6}
+.stars{text-align:center;font-size:2rem;letter-spacing:6px;margin-bottom:6px}
+.review{margin-top:16px}
+.review-item{border:2px solid #C7D9EA;border-radius:12px;padding:10px 12px;margin-bottom:8px;font-size:.93rem;line-height:1.6}
+.review-item.wrong-item{border-color:var(--coral);background:#FFF7F4}
+footer{text-align:center;font-size:.85rem;color:#6C8AA6;margin-top:30px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+@media(max-width:480px){header h1{font-size:1.55rem}.q-text{font-size:1.1rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="cover">
+    <svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="하준이의 지구 탐험대 커버">
+      <defs>
+        <radialGradient id="csky" cx="50%" cy="30%" r="90%">
+          <stop offset="0%" stop-color="#1B3B6F"/><stop offset="55%" stop-color="#122A52"/><stop offset="100%" stop-color="#0A1B38"/>
+        </radialGradient>
+        <radialGradient id="cglobe" cx="35%" cy="30%" r="80%">
+          <stop offset="0%" stop-color="#7FC3F2"/><stop offset="60%" stop-color="#4FA3E3"/><stop offset="100%" stop-color="#2A72B5"/>
+        </radialGradient>
+      </defs>
+      <rect width="1200" height="630" fill="url(#csky)"/>
+      <g fill="#FFFFFF">
+        <circle cx="90" cy="80" r="3" opacity=".9"/><circle cx="200" cy="150" r="2" opacity=".6"/>
+        <circle cx="150" cy="420" r="2.5" opacity=".8"/><circle cx="320" cy="60" r="2" opacity=".7"/>
+        <circle cx="60" cy="280" r="2" opacity=".5"/><circle cx="1120" cy="90" r="3" opacity=".9"/>
+        <circle cx="1040" cy="200" r="2" opacity=".6"/><circle cx="1150" cy="350" r="2.5" opacity=".8"/>
+        <circle cx="980" cy="70" r="2" opacity=".5"/><circle cx="1100" cy="520" r="2" opacity=".7"/>
+        <circle cx="250" cy="540" r="2" opacity=".6"/><circle cx="420" cy="90" r="2" opacity=".5"/>
+      </g>
+      <g fill="#FFC93C">
+        <path d="M 130 200 l 5 12 12 5 -12 5 -5 12 -5 -12 -12 -5 12 -5 z" opacity=".95"/>
+        <path d="M 1070 430 l 4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4 z" opacity=".9"/>
+        <path d="M 300 330 l 3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z" opacity=".8"/>
+      </g>
+      <g transform="translate(880,315)">
+        <ellipse rx="270" ry="80" fill="none" stroke="#FFC93C" stroke-width="4" opacity=".55" transform="rotate(-18)"/>
+        <circle r="205" fill="url(#cglobe)" stroke="#0A1B38" stroke-width="7"/>
+        <ellipse cx="-70" cy="-75" rx="72" ry="48" fill="#58B368"/>
+        <ellipse cx="62" cy="-25" rx="44" ry="66" fill="#58B368"/>
+        <ellipse cx="-42" cy="88" rx="58" ry="36" fill="#58B368"/>
+        <ellipse cx="110" cy="105" rx="36" ry="24" fill="#58B368"/>
+        <line x1="-168" y1="-118" x2="168" y2="-118" stroke="#0E4E86" stroke-width="3" stroke-dasharray="10 8" opacity=".7"/>
+        <line x1="-192" y1="-62" x2="192" y2="-62" stroke="#0E4E86" stroke-width="3" stroke-dasharray="10 8" opacity=".7"/>
+        <line x1="-192" y1="62" x2="192" y2="62" stroke="#0E4E86" stroke-width="3" stroke-dasharray="10 8" opacity=".7"/>
+        <line x1="-168" y1="118" x2="168" y2="118" stroke="#0E4E86" stroke-width="3" stroke-dasharray="10 8" opacity=".7"/>
+        <ellipse rx="130" ry="205" fill="none" stroke="#0E4E86" stroke-width="3" stroke-dasharray="10 8" opacity=".7"/>
+        <ellipse rx="60" ry="205" fill="none" stroke="#0E4E86" stroke-width="3" stroke-dasharray="10 8" opacity=".7"/>
+        <line x1="-205" y1="0" x2="205" y2="0" stroke="#E84545" stroke-width="9"/>
+        <line x1="0" y1="-205" x2="0" y2="205" stroke="#8A63FF" stroke-width="9"/>
+        <g transform="translate(232,0)">
+          <rect y="-22" width="86" height="44" rx="22" fill="#E84545"/>
+          <text x="43" y="10" font-family="Jua, sans-serif" font-size="26" fill="#FFF" text-anchor="middle">적도</text>
+        </g>
+        <g transform="translate(0,-248)">
+          <rect x="-88" y="-22" width="176" height="44" rx="22" fill="#8A63FF"/>
+          <text y="10" font-family="Jua, sans-serif" font-size="24" fill="#FFF" text-anchor="middle">본초자오선</text>
+        </g>
+        <ellipse cx="-88" cy="-102" rx="52" ry="30" fill="#FFF" opacity=".28" transform="rotate(-28 -88 -102)"/>
+      </g>
+      <g transform="translate(560,120) rotate(35)">
+        <path d="M0 -42 C 16 -22, 16 14, 0 34 C -16 14, -16 -22, 0 -42 Z" fill="#FFF" stroke="#0A1B38" stroke-width="4"/>
+        <circle cy="-8" r="8" fill="#4FA3E3" stroke="#0A1B38" stroke-width="3"/>
+        <path d="M -12 12 L -24 34 L -10 28 Z" fill="#E84545" stroke="#0A1B38" stroke-width="3"/>
+        <path d="M 12 12 L 24 34 L 10 28 Z" fill="#E84545" stroke="#0A1B38" stroke-width="3"/>
+        <path d="M -6 36 Q 0 58 6 36 Z" fill="#FFC93C"/>
+      </g>
+      <g font-family="Jua, sans-serif">
+        <text x="80" y="235" font-size="34" fill="#FFC93C" letter-spacing="6">초등 6학년 사회 · 세계 지리</text>
+        <text x="76" y="330" font-size="82" fill="#FFFFFF">하준이의</text>
+        <text x="76" y="430" font-size="96" fill="#FFC93C">지구 탐험대</text>
+        <text x="80" y="500" font-size="30" fill="#BFD9F2">적도 · 위도 · 경도 · 북반구 · 남반구 · 본초자오선</text>
+        <g transform="translate(80,532)">
+          <rect width="300" height="56" rx="28" fill="#58B368" stroke="#0A1B38" stroke-width="4"/>
+          <text x="150" y="38" font-size="28" fill="#FFF" text-anchor="middle">도전! 10문제 퀴즈</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" id="tabLearn" onclick="showTab('learn')">📖 공부하기</button>
+  <button class="tab-btn" id="tabQuiz" onclick="showTab('quiz')">✏️ 문제풀기</button>
+</div>
+
+<!-- ============ 학습 모드 ============ -->
+<section id="learn">
+  <div class="card">
+    <div class="concept-nav" id="conceptNav"></div>
+    <div id="conceptBody"></div>
+  </div>
+</section>
+
+<!-- ============ 퀴즈 모드 ============ -->
+<section id="quiz" class="hidden">
+  <div class="card" id="quizIntro">
+    <h2 class="jua" style="font-size:1.4rem;margin-bottom:10px">✏️ 도전! 지구 탐험 퀴즈</h2>
+    <div class="quiz-info">
+      총 <b>10문제</b>, 한 문제에 <b>10점</b>이야.<br>
+      문제를 풀면 바로 정답과 설명을 알려줄게. 천천히 읽고 골라 보자!
+    </div>
+    <h3 class="jua" style="margin:14px 0 6px">🏆 점수별 약속</h3>
+    <table class="reward-table">
+      <tr><th>점수</th><th>결과</th></tr>
+      <tr class="good"><td>90점 이상</td><td>🚲 자전거 2시간!</td></tr>
+      <tr class="good"><td>80 ~ 89점</td><td>👊 펀치 5번!</td></tr>
+      <tr class="good"><td>70 ~ 79점</td><td>💰 용돈 2,000원!</td></tr>
+      <tr class="retry"><td>70점 미만</td><td>📚 다시 복습하고 재도전!</td></tr>
+    </table>
+    <br>
+    <button class="start-btn" onclick="startQuiz()">🚀 퀴즈 시작!</button>
+  </div>
+
+  <div class="card hidden" id="quizPlay">
+    <div class="progress">
+      <div class="bar"><div class="fill" id="progFill"></div></div>
+      <div class="label" id="progLabel">1 / 10</div>
+    </div>
+    <div class="q-text" id="qText"></div>
+    <div class="opts" id="qOpts"></div>
+    <div class="feedback" id="qFeedback"></div>
+    <br>
+    <button class="next-btn hidden" id="nextBtn" onclick="nextQuestion()">다음 문제 ▶</button>
+  </div>
+
+  <div class="card hidden" id="quizResult">
+    <div class="stars" id="resStars"></div>
+    <div class="score-big" id="resScore"></div>
+    <div class="score-msg" id="resMsg"></div>
+    <div class="reward-banner" id="resReward"></div>
+    <div class="review" id="resReview"></div>
+    <button class="retry-btn" onclick="resetQuiz()">🔄 다시 도전하기</button>
+  </div>
+</section>
+
+<footer>초등학교 6학년 사회 · 세계 여러 나라의 자연과 문화 단원</footer>
+</div>
+
+<script>
+/* ---------- 지구본 SVG 생성 ---------- */
+function globeSVG(opts){
+  const o = Object.assign({equator:false,latitudes:false,longitudes:false,meridian:false,north:false,south:false,size:260},opts||{});
+  const s=o.size,c=s/2,r=s/2-14;
+  let inner='';
+  // 바다(구)
+  inner+=`<circle cx="${c}" cy="${c}" r="${r}" fill="#4FA3E3" stroke="#14375A" stroke-width="3"/>`;
+  // 대륙 느낌 (단순 도형)
+  inner+=`<ellipse cx="${c-r*0.35}" cy="${c-r*0.35}" rx="${r*0.32}" ry="${r*0.22}" fill="#58B368" opacity="0.95"/>`;
+  inner+=`<ellipse cx="${c+r*0.30}" cy="${c-r*0.1}" rx="${r*0.2}" ry="${r*0.3}" fill="#58B368" opacity="0.95"/>`;
+  inner+=`<ellipse cx="${c-r*0.2}" cy="${c+r*0.42}" rx="${r*0.26}" ry="${r*0.16}" fill="#58B368" opacity="0.95"/>`;
+  // 반구 색칠
+  if(o.north) inner+=`<path d="M ${c-r},${c} A ${r},${r} 0 0 1 ${c+r},${c} Z" fill="#FFC93C" opacity="0.45"/>`;
+  if(o.south) inner+=`<path d="M ${c-r},${c} A ${r},${r} 0 0 0 ${c+r},${c} Z" fill="#7C4DFF" opacity="0.35"/>`;
+  // 위선(가로줄)
+  if(o.latitudes){
+    [-0.66,-0.33,0.33,0.66].forEach(k=>{
+      const y=c+r*k, half=Math.sqrt(r*r-(r*k)*(r*k));
+      inner+=`<line x1="${c-half}" y1="${y}" x2="${c+half}" y2="${y}" stroke="#0E4E86" stroke-width="2" stroke-dasharray="6 5" opacity="0.85"/>`;
+    });
+  }
+  // 경선(세로 타원)
+  if(o.longitudes){
+    [0.33,0.66].forEach(k=>{
+      inner+=`<ellipse cx="${c}" cy="${c}" rx="${r*k}" ry="${r}" fill="none" stroke="#0E4E86" stroke-width="2" stroke-dasharray="6 5" opacity="0.85"/>`;
+    });
+    inner+=`<line x1="${c}" y1="${c-r}" x2="${c}" y2="${c+r}" stroke="#0E4E86" stroke-width="2" stroke-dasharray="6 5" opacity="0.5"/>`;
+  }
+  // 적도(빨간 굵은 가로선)
+  if(o.equator){
+    inner+=`<line x1="${c-r}" y1="${c}" x2="${c+r}" y2="${c}" stroke="#E84545" stroke-width="5"/>`;
+    inner+=`<rect x="${c+r-2}" y="${c-13}" width="52" height="26" rx="13" fill="#E84545"/>`;
+    inner+=`<text x="${c+r+24}" y="${c+5}" font-size="14" fill="#fff" text-anchor="middle" font-family="Jua">적도</text>`;
+  }
+  // 본초자오선(보라 세로선)
+  if(o.meridian){
+    inner+=`<line x1="${c}" y1="${c-r}" x2="${c}" y2="${c+r}" stroke="#7C4DFF" stroke-width="5"/>`;
+    inner+=`<rect x="${c-45}" y="${c-r-30}" width="90" height="24" rx="12" fill="#7C4DFF"/>`;
+    inner+=`<text x="${c}" y="${c-r-13}" font-size="13" fill="#fff" text-anchor="middle" font-family="Jua">본초자오선</text>`;
+  }
+  if(o.north) inner+=`<text x="${c}" y="${c-r*0.45}" font-size="17" text-anchor="middle" font-family="Jua" fill="#14375A">북반구 ⬆</text>`;
+  if(o.south) inner+=`<text x="${c}" y="${c+r*0.55}" font-size="17" text-anchor="middle" font-family="Jua" fill="#14375A">남반구 ⬇</text>`;
+  return `<svg width="${s+70}" height="${s+40}" viewBox="-10 -35 ${s+70} ${s+40}" role="img">${inner}</svg>`;
+}
+
+/* ---------- 개념 학습 데이터 ---------- */
+const concepts=[
+ {id:'equator',name:'🔴 적도',title:'적도 (赤道)',
+  easy:'지구 허리를 딱 반으로 나누는 <b>빨간 벨트</b>라고 생각해 봐! 지구에서 가장 뚱뚱한(둘레가 긴) 부분이야.',
+  body:`<p>적도는 지구의 <b>한가운데를 가로로 지나는 선</b>이에요. 적도를 기준으로 지구가 위(북쪽)와 아래(남쪽)로 나뉘어요.</p>
+  <p>적도의 위도는 <b>0도(0°)</b>! 위도를 잴 때 출발점이 되는 아주 중요한 선이에요.</p>
+  <p>💡 적도 근처 나라들(에콰도르, 인도네시아, 케냐 등)은 일 년 내내 아주 더워요!</p>`,
+  globe:{equator:true}},
+ {id:'lat',name:'📏 위도',title:'위도와 위선',
+  easy:'아파트 <b>몇 층</b>인지 알려주는 숫자라고 생각해! 적도(0층)에서 위로 갈수록, 아래로 갈수록 숫자가 커져.',
+  body:`<p><b>위선</b>은 적도와 나란하게 그은 <b>가로선</b>이고, <b>위도</b>는 그 선이 적도에서 얼마나 떨어져 있는지 나타내는 숫자예요.</p>
+  <p>적도가 0°, 북극과 남극이 90°! 그래서 위도는 <b>0°부터 90°까지</b> 있어요. 북쪽이면 북위, 남쪽이면 남위라고 불러요.</p>
+  <p>💡 우리나라 서울은 대략 <b>북위 37°</b>에 있어요.</p>`,
+  globe:{equator:true,latitudes:true}},
+ {id:'lon',name:'📐 경도',title:'경도와 경선',
+  easy:'수박 자를 때 생기는 <b>세로 줄무늬</b>를 떠올려 봐! 북극에서 남극까지 세로로 그은 선이야.',
+  body:`<p><b>경선</b>은 북극과 남극을 잇는 <b>세로선</b>이고, <b>경도</b>는 본초자오선에서 동쪽이나 서쪽으로 얼마나 떨어져 있는지 나타내는 숫자예요.</p>
+  <p>본초자오선이 0°, 그리고 동쪽으로 180°, 서쪽으로 180°까지! 그래서 경도는 <b>0°부터 180°까지</b> 있어요. 동쪽이면 동경, 서쪽이면 서경이에요.</p>
+  <p>💡 우리나라는 대략 <b>동경 127°</b>에 있어요. 경도가 다르면 시간(시차)도 달라져요!</p>`,
+  globe:{meridian:true,longitudes:true}},
+ {id:'hemi',name:'🌗 북반구·남반구',title:'북반구와 남반구',
+  easy:'사과를 가로로 반 자르면 <b>윗조각과 아랫조각</b>이 생기지? 지구도 적도로 자르면 위쪽이 북반구, 아래쪽이 남반구야!',
+  body:`<p>적도를 기준으로 <b>위쪽(북쪽) 절반이 북반구</b>, <b>아래쪽(남쪽) 절반이 남반구</b>예요.</p>
+  <p>우리나라, 중국, 미국, 유럽은 모두 <b>북반구</b>에 있고, 호주(오스트레일리아), 뉴질랜드, 아르헨티나는 <b>남반구</b>에 있어요.</p>
+  <p>💡 북반구가 여름일 때 남반구는 겨울! 그래서 호주에서는 <b>크리스마스가 한여름</b>이에요. 산타가 반바지를 입을지도? 🎅🩳</p>`,
+  globe:{equator:true,north:true,south:true}},
+ {id:'meridian',name:'💜 본초자오선',title:'본초자오선',
+  easy:'달리기 경주의 <b>출발선</b>! 경도를 재기 시작하는 기준이 되는 세로선이야.',
+  body:`<p>본초자오선은 <b>경도 0°인 세로선</b>이에요. 세계 여러 나라가 "경도를 어디서부터 잴까?" 고민하다가 <b>영국 런던의 그리니치 천문대</b>를 지나는 선을 기준으로 정했어요.</p>
+  <p>본초자오선을 기준으로 지구는 <b>동반구</b>(동쪽 절반)와 <b>서반구</b>(서쪽 절반)로 나뉘어요.</p>
+  <p>💡 세계의 시간도 이 선을 기준으로 정해져요. 그리니치를 기준으로 한 시간을 '그리니치 표준시(GMT)'라고 해요!</p>`,
+  globe:{meridian:true,equator:true}}
+];
+
+const nav=document.getElementById('conceptNav');
+concepts.forEach((cp,i)=>{
+  const b=document.createElement('button');
+  b.className='chip'+(i===0?' on':'');
+  b.textContent=cp.name;
+  b.onclick=()=>showConcept(i);
+  nav.appendChild(b);
+});
+function showConcept(i){
+  document.querySelectorAll('.chip').forEach((c,j)=>c.classList.toggle('on',j===i));
+  const cp=concepts[i];
+  document.getElementById('conceptBody').innerHTML=
+   `<div class="concept">
+     <h2>${cp.title}</h2>
+     <div class="easy">🧒 쉽게 말하면? ${cp.easy}</div>
+     <div class="globe-box">${globeSVG(cp.globe)}</div>
+     ${cp.body}
+    </div>`;
+}
+showConcept(0);
+
+/* ---------- 퀴즈 데이터 ---------- */
+const questions=[
+ {q:'지구 한가운데를 가로로 지나며, 지구를 북쪽과 남쪽으로 나누는 선은?',
+  opts:['본초자오선','적도','경선','날짜변경선'],a:1,
+  exp:'적도는 지구 허리를 가로로 지나는 선으로, 위도 0°야!'},
+ {q:'적도를 기준으로 지구의 위쪽(북쪽) 절반을 무엇이라고 할까?',
+  opts:['남반구','동반구','북반구','서반구'],a:2,
+  exp:'적도 위쪽은 북반구, 아래쪽은 남반구야.'},
+ {q:'위도가 0°인 곳은 어디일까?',
+  opts:['북극','남극','본초자오선','적도'],a:3,
+  exp:'위도는 적도에서부터 재기 시작해. 그래서 적도가 위도 0°!'},
+ {q:'경도가 0°인 기준선의 이름은?',
+  opts:['본초자오선','적도','북회귀선','위선'],a:0,
+  exp:'경도의 출발선은 본초자오선! 영국 그리니치 천문대를 지나가.'},
+ {q:'본초자오선이 지나가는 곳으로 유명한 천문대가 있는 나라는?',
+  opts:['프랑스','영국','미국','독일'],a:1,
+  exp:'영국 런던의 그리니치 천문대를 지나는 선이 본초자오선이야.'},
+ {q:'적도와 나란하게 그은 가로선을 무엇이라고 할까?',
+  opts:['경선','자오선','위선','수평선'],a:2,
+  exp:'가로선은 위선(위도를 나타내는 선), 세로선은 경선이야.'},
+ {q:'북극과 남극을 세로로 잇는 선을 무엇이라고 할까?',
+  opts:['위선','적도','경선','지평선'],a:2,
+  exp:'북극~남극을 잇는 세로선이 경선이고, 경도를 나타내 줘.'},
+ {q:'우리나라(대한민국)는 어느 반구에 있을까?',
+  opts:['남반구','북반구','서반구에만 있다','적도 위에 있다'],a:1,
+  exp:'우리나라는 적도보다 위(북쪽)에 있으니까 북반구야! (북위 약 33~43°)'},
+ {q:'위도는 몇 도(°)부터 몇 도까지 있을까?',
+  opts:['0° ~ 90°','0° ~ 180°','0° ~ 360°','0° ~ 100°'],a:0,
+  exp:'적도가 0°, 북극과 남극이 90°니까 위도는 0°~90°까지야.'},
+ {q:'북반구가 여름일 때, 남반구의 계절은?',
+  opts:['여름','봄','겨울','가을'],a:2,
+  exp:'북반구와 남반구는 계절이 반대! 그래서 호주는 크리스마스가 한여름이야. 🎅'}
+];
+
+let qIndex=0, score=0, answered=false, wrongList=[];
+
+function showTab(t){
+  document.getElementById('learn').classList.toggle('hidden',t!=='learn');
+  document.getElementById('quiz').classList.toggle('hidden',t!=='quiz');
+  document.getElementById('tabLearn').classList.toggle('active',t==='learn');
+  document.getElementById('tabQuiz').classList.toggle('active',t==='quiz');
+}
+
+function startQuiz(){
+  qIndex=0;score=0;wrongList=[];
+  document.getElementById('quizIntro').classList.add('hidden');
+  document.getElementById('quizResult').classList.add('hidden');
+  document.getElementById('quizPlay').classList.remove('hidden');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  answered=false;
+  const q=questions[qIndex];
+  document.getElementById('progLabel').textContent=`${qIndex+1} / ${questions.length}`;
+  document.getElementById('progFill').style.width=`${(qIndex)/questions.length*100}%`;
+  document.getElementById('qText').textContent=`Q${qIndex+1}. ${q.q}`;
+  const box=document.getElementById('qOpts');box.innerHTML='';
+  q.opts.forEach((op,i)=>{
+    const b=document.createElement('button');
+    b.className='opt';b.textContent=`${['①','②','③','④'][i]} ${op}`;
+    b.onclick=()=>choose(i,b);
+    box.appendChild(b);
+  });
+  const fb=document.getElementById('qFeedback');
+  fb.className='feedback';fb.textContent='';
+  document.getElementById('nextBtn').classList.add('hidden');
+}
+
+function choose(i,btn){
+  if(answered)return;answered=true;
+  const q=questions[qIndex];
+  const opts=document.querySelectorAll('.opt');
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById('qFeedback');
+  if(i===q.a){
+    score+=10;btn.classList.add('correct');
+    fb.className='feedback show ok';
+    fb.innerHTML=`⭕ <b>정답이야! +10점</b><br>${q.exp}`;
+  }else{
+    btn.classList.add('wrong');opts[q.a].classList.add('correct');
+    fb.className='feedback show no';
+    fb.innerHTML=`❌ <b>아쉽다!</b> 정답은 「${q.opts[q.a]}」<br>${q.exp}`;
+    wrongList.push(q);
+  }
+  const nb=document.getElementById('nextBtn');
+  nb.textContent=(qIndex===questions.length-1)?'🏁 결과 보기':'다음 문제 ▶';
+  nb.classList.remove('hidden');
+}
+
+function nextQuestion(){
+  qIndex++;
+  if(qIndex<questions.length){renderQuestion();}
+  else{showResult();}
+}
+
+function showResult(){
+  document.getElementById('quizPlay').classList.add('hidden');
+  const res=document.getElementById('quizResult');
+  res.classList.remove('hidden');
+  document.getElementById('resScore').textContent=`${score}점`;
+  const starCount=Math.max(1,Math.round(score/20));
+  document.getElementById('resStars').textContent='⭐'.repeat(starCount)+'☆'.repeat(5-starCount);
+
+  let banner=document.getElementById('resReward'), msg=document.getElementById('resMsg');
+  if(score>=90){
+    banner.className='reward-banner tier1';
+    banner.innerHTML='🚲 <b>자전거 2시간 획득!</b><br>지구 박사님 인정! 최고야 하준!';
+    msg.textContent='거의 다 맞혔어! 완벽에 가까운 실력이야 👏';
+  }else if(score>=80){
+    banner.className='reward-banner tier2';
+    banner.innerHTML='👊 <b>펀치 5번 획득!</b><br>아주 잘했어!';
+    msg.textContent='조금만 더 하면 90점도 문제없겠는걸? 💪';
+  }else if(score>=70){
+    banner.className='reward-banner tier3';
+    banner.innerHTML='💰 <b>용돈 2,000원 획득!</b><br>합격점이야!';
+    msg.textContent='좋았어! 틀린 문제만 다시 보면 점수가 쑥 올라갈 거야.';
+  }else{
+    banner.className='reward-banner tier4';
+    banner.innerHTML='📚 <b>다시 복습하고 재도전!</b><br>괜찮아, 틀리면서 배우는 거야!';
+    msg.textContent='아래 틀린 문제를 다시 읽어 보고, 공부하기 탭에서 복습한 뒤 재도전해 보자!';
+  }
+
+  const rv=document.getElementById('resReview');
+  if(wrongList.length===0){
+    rv.innerHTML='<div class="review-item">🎉 틀린 문제가 하나도 없어! 대단해!</div>';
+  }else{
+    rv.innerHTML='<h3 class="jua" style="margin-bottom:8px">📝 틀린 문제 다시 보기</h3>'+
+      wrongList.map(q=>`<div class="review-item wrong-item"><b>Q. ${q.q}</b><br>✅ 정답: ${q.opts[q.a]}<br>💡 ${q.exp}</div>`).join('');
+  }
+  rv.insertAdjacentHTML('beforeend','<br>');
+}
+
+function resetQuiz(){
+  document.getElementById('quizResult').classList.add('hidden');
+  document.getElementById('quizIntro').classList.remove('hidden');
+}
+</script>
+</body>
+</html>
