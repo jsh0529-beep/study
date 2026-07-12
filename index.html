@@ -72,6 +72,18 @@ header{padding:8px 0 4px}
 .review-item{border:2px solid #C7D9EA;border-radius:12px;padding:10px 12px;margin-bottom:8px;font-size:.93rem;line-height:1.6}
 .review-item.wrong-item{border-color:var(--coral);background:#FFF7F4}
 footer{text-align:center;font-size:.85rem;color:#6C8AA6;margin-top:30px}
+/* --- 마지막 미션 --- */
+.tip-card{display:flex;gap:12px;align-items:flex-start;background:#F5FAFF;border:2px solid var(--navy);border-radius:14px;padding:12px 14px;margin-bottom:10px;line-height:1.65;font-size:.98rem}
+.tip-num{flex:0 0 auto;font-family:'Jua',sans-serif;width:34px;height:34px;border-radius:50%;background:var(--sun);border:2px solid var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.script-card{border:2px solid var(--navy);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.script-card>button{width:100%;text-align:left;font-family:'Jua',sans-serif;font-size:1.05rem;padding:12px 16px;background:#FFF1BF;border:none;cursor:pointer;color:var(--navy)}
+.script-body{display:none;padding:14px 16px;background:#FFFDF4;line-height:1.8;font-size:.98rem;border-top:2px dashed var(--navy)}
+.script-card.open .script-body{display:block}
+.script-body .bubble{background:#EAF6FF;border:2px solid var(--ocean-light);border-radius:14px;padding:10px 14px;margin:6px 0}
+.stamp-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:2px solid var(--navy);border-radius:14px;padding:10px 14px;margin-bottom:8px;background:#F5FAFF}
+.stamp-row .nm{font-size:.98rem}
+.stamp-btn{flex:0 0 auto;font-family:'Jua',sans-serif;width:64px;height:64px;border-radius:50%;border:3px dashed var(--navy);background:#fff;cursor:pointer;font-size:.8rem;color:#6C8AA6;transition:.15s}
+.stamp-btn.stamped{border-style:solid;border-color:var(--coral);background:#FFE1D6;color:var(--coral);font-size:1.7rem;transform:rotate(-12deg)}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
 @media(max-width:480px){header h1{font-size:1.55rem}.q-text{font-size:1.1rem}}
 </style>
@@ -152,6 +164,7 @@ footer{text-align:center;font-size:.85rem;color:#6C8AA6;margin-top:30px}
 <div class="tabs">
   <button class="tab-btn active" id="tabLearn" onclick="showTab('learn')">📖 공부하기</button>
   <button class="tab-btn" id="tabQuiz" onclick="showTab('quiz')">✏️ 문제풀기</button>
+  <button class="tab-btn" id="tabMission" onclick="showTab('mission')">🎤 마지막 미션</button>
 </div>
 
 <!-- ============ 학습 모드 ============ -->
@@ -161,6 +174,34 @@ footer{text-align:center;font-size:.85rem;color:#6C8AA6;margin-top:30px}
     <div id="conceptBody"></div>
   </div>
 </section>
+
+<!-- ============ 마지막 미션: 엄마에게 설명하기 ============ -->
+<section id="mission" class="hidden">
+  <div class="card">
+    <h2 class="jua" style="font-size:1.45rem;margin-bottom:8px">🎤 마지막 미션: 엄마에게 멋지게 설명하기!</h2>
+    <div class="quiz-info">
+      진짜 지구 박사는 <b>남에게 설명할 수 있는 사람</b>이야!<br>
+      아래 <b>비법 3단계</b>대로 엄마에게 설명하고, 엄마가 도장을 눌러 주면 미션 성공! 🏅
+    </div>
+
+    <h3 class="jua" style="margin:16px 0 8px">🪄 멋지게 설명하는 비법 3단계</h3>
+    <div class="tip-card"><span class="tip-num">1</span><div><b>비유로 시작하기</b><br>"엄마, 지구가 큰 수박이라고 생각해 봐!" 처럼 <b>엄마가 아는 물건</b>에 빗대서 시작하면 귀가 쫑긋! 👂</div></div>
+    <div class="tip-card"><span class="tip-num">2</span><div><b>그리면서 설명하기</b><br>종이에 동그라미(지구)를 그리고, 가로선·세로선을 <b>직접 그으면서</b> 설명해. 손으로 보여주면 두 배로 멋있어! ✏️</div></div>
+    <div class="tip-card"><span class="tip-num">3</span><div><b>거꾸로 퀴즈 내기</b><br>설명이 끝나면 "엄마, 그럼 문제 낼게! 위도 0°인 선은 뭐~게?" 하고 <b>엄마에게 문제를 내 봐</b>. 선생님이 된 기분! 👨‍🏫</div></div>
+
+    <h3 class="jua" style="margin:20px 0 8px">💬 이렇게 말해 봐! (설명 대본 카드)</h3>
+    <p style="font-size:.92rem;color:#3D6285;margin-bottom:10px">카드를 누르면 대본이 열려요. 몇 번 읽어 보고, 나중엔 안 보고 말해 보자!</p>
+    <div id="scriptCards"></div>
+
+    <h3 class="jua" style="margin:22px 0 8px">✅ 엄마 확인 도장판</h3>
+    <p style="font-size:.92rem;color:#3D6285;margin-bottom:10px">하준이가 설명을 잘 마치면, 엄마가 직접 도장을 눌러 주세요!</p>
+    <div id="stampBoard"></div>
+    <div id="missionDone" class="reward-banner tier1 hidden" style="margin-top:16px">
+      🏆 <b>미션 올 클리어!</b><br>하준이는 이제 진짜 지구 박사! 축하해! 🎉
+    </div>
+  </div>
+</section>
+
 
 <!-- ============ 퀴즈 모드 ============ -->
 <section id="quiz" class="hidden">
@@ -201,6 +242,8 @@ footer{text-align:center;font-size:.85rem;color:#6C8AA6;margin-top:30px}
     <div class="reward-banner" id="resReward"></div>
     <div class="review" id="resReview"></div>
     <button class="retry-btn" onclick="resetQuiz()">🔄 다시 도전하기</button>
+    <br>
+    <button class="start-btn" onclick="showTab('mission')">🎤 마지막 미션! 엄마에게 설명하러 가기</button>
   </div>
 </section>
 
@@ -347,8 +390,63 @@ let qIndex=0, score=0, answered=false, wrongList=[];
 function showTab(t){
   document.getElementById('learn').classList.toggle('hidden',t!=='learn');
   document.getElementById('quiz').classList.toggle('hidden',t!=='quiz');
+  document.getElementById('mission').classList.toggle('hidden',t!=='mission');
   document.getElementById('tabLearn').classList.toggle('active',t==='learn');
   document.getElementById('tabQuiz').classList.toggle('active',t==='quiz');
+  document.getElementById('tabMission').classList.toggle('active',t==='mission');
+}
+
+/* ---------- 마지막 미션: 설명 대본 ---------- */
+const scripts=[
+ {t:'🔴 적도 설명하기',s:[
+  '엄마, 지구가 커다란 <b>수박</b>이라고 생각해 봐!',
+  '수박 허리를 딱 반으로 자르는 선이 있는데, 그게 바로 <b>적도</b>야.',
+  '적도는 지구에서 제일 뚱뚱한 부분이고, <b>위도 0도</b>야. 여기서부터 위도를 재기 시작해!',
+  '그래서 적도 근처 나라들은 일 년 내내 엄청 더워. 에콰도르, 케냐 같은 나라들!']},
+ {t:'📏 위도 설명하기',s:[
+  '엄마, 우리 아파트 <b>몇 층</b>인지 말하면 위치를 알 수 있잖아?',
+  '위도도 똑같아! 적도가 <b>0층(0도)</b>이고, 북극·남극 쪽으로 갈수록 숫자가 커져서 <b>90도</b>까지 있어.',
+  '적도보다 위면 <b>북위</b>, 아래면 <b>남위</b>라고 불러.',
+  '우리나라 서울은 북위 37도쯤이야. 지구 아파트 37층에 사는 셈이지!']},
+ {t:'📐 경도 설명하기',s:[
+  '이번엔 수박의 <b>세로 줄무늬</b>를 봐, 엄마!',
+  '북극에서 남극까지 세로로 그은 선이 <b>경선</b>이고, 그 위치를 숫자로 나타낸 게 <b>경도</b>야.',
+  '경도는 본초자오선이 0도이고, 동쪽·서쪽으로 <b>180도</b>까지 있어.',
+  '경도가 다르면 <b>시간도 달라져</b>! 그래서 미국은 우리랑 낮과 밤이 반대야.']},
+ {t:'🌗 북반구·남반구 설명하기',s:[
+  '엄마, 사과를 가로로 반 자르면 윗조각·아랫조각이 생기지?',
+  '지구도 적도로 자르면 위쪽이 <b>북반구</b>, 아래쪽이 <b>남반구</b>야.',
+  '우리나라는 북반구에 있고, 호주는 남반구에 있어.',
+  '신기한 건 계절이 <b>반대</b>라는 거야! 우리가 겨울일 때 호주는 여름이라서, 호주 산타는 반바지를 입을지도 몰라! 🎅🩳']},
+ {t:'💜 본초자오선 설명하기',s:[
+  '엄마, 달리기 시합엔 <b>출발선</b>이 있어야 하잖아?',
+  '경도를 재는 출발선이 바로 <b>본초자오선</b>이야. 경도 0도!',
+  '세계 여러 나라가 회의해서 <b>영국 그리니치 천문대</b>를 지나는 선으로 정했어.',
+  '이 선을 기준으로 지구가 동반구와 서반구로 나뉘고, 세계 시간도 여기를 기준으로 정해!']}
+];
+
+const scBox=document.getElementById('scriptCards');
+scripts.forEach((sc,i)=>{
+  const d=document.createElement('div');d.className='script-card';
+  d.innerHTML=`<button onclick="this.parentElement.classList.toggle('open')">${sc.t} ▾</button>
+   <div class="script-body">${sc.s.map(line=>`<div class="bubble">🗣️ ${line}</div>`).join('')}</div>`;
+  scBox.appendChild(d);
+});
+
+/* ---------- 엄마 확인 도장판 ---------- */
+const stampItems=['적도를 비유로 설명했어요','위도를 설명했어요','경도를 설명했어요','북반구·남반구를 설명했어요','본초자오선을 설명하고 엄마에게 퀴즈도 냈어요'];
+const stBox=document.getElementById('stampBoard');
+stampItems.forEach((nm,i)=>{
+  const row=document.createElement('div');row.className='stamp-row';
+  row.innerHTML=`<div class="nm">${i+1}. ${nm}</div><button class="stamp-btn" id="stamp${i}" onclick="toggleStamp(${i})">엄마<br>도장</button>`;
+  stBox.appendChild(row);
+});
+function toggleStamp(i){
+  const b=document.getElementById('stamp'+i);
+  b.classList.toggle('stamped');
+  b.innerHTML=b.classList.contains('stamped')?'💮':'엄마<br>도장';
+  const all=stampItems.every((_,j)=>document.getElementById('stamp'+j).classList.contains('stamped'));
+  document.getElementById('missionDone').classList.toggle('hidden',!all);
 }
 
 function startQuiz(){
