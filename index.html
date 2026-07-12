@@ -6,7 +6,7 @@
 <title>하준이의 지구 탐험대 🌍</title>
 <!-- SNS 공유 썸네일 -->
 <meta property="og:title" content="하준이의 지구 탐험대 🌍">
-<meta property="og:description" content="적도·위도·경도·북반구·남반구·본초자오선, 초등 6학년 지리 개념 학습 + 10문제 퀴즈!">
+<meta property="og:description" content="적도·위도·경도·북반구·남반구·본초자오선, 설명 듣고 바로 문제 풀기!">
 <meta property="og:image" content="https://jsh0529-beep.github.io/study/cover.png">
 <meta property="og:url" content="https://jsh0529-beep.github.io/study/">
 <meta property="og:type" content="website">
@@ -15,7 +15,6 @@
 :root{
   --sky:#EAF6FF; --ocean:#1E6FB8; --ocean-light:#4FA3E3; --land:#58B368;
   --navy:#14375A; --sun:#FFC93C; --coral:#FF7B54; --white:#FFFFFF;
-  --line-red:#E84545; --line-purple:#7C4DFF;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Gowun Dodum',sans-serif;background:linear-gradient(180deg,#D9EFFF 0%,#EAF6FF 60%,#F5FBFF 100%);color:var(--navy);min-height:100vh}
@@ -24,18 +23,10 @@ h1,h2,h3,.jua{font-family:'Jua',sans-serif}
 header{padding:8px 0 4px}
 .cover{border:3px solid var(--navy);border-radius:22px;overflow:hidden;box-shadow:0 6px 0 rgba(20,55,90,.15);line-height:0}
 .cover svg{width:100%;height:auto;display:block}
-.tabs{display:flex;gap:8px;justify-content:center;margin:20px 0}
-.tab-btn{font-family:'Jua',sans-serif;font-size:1.05rem;padding:10px 22px;border:3px solid var(--navy);border-radius:999px;background:var(--white);color:var(--navy);cursor:pointer;transition:.15s}
+.tabs{display:flex;gap:8px;justify-content:center;margin:20px 0;flex-wrap:wrap}
+.tab-btn{font-family:'Jua',sans-serif;font-size:1rem;padding:10px 18px;border:3px solid var(--navy);border-radius:999px;background:var(--white);color:var(--navy);cursor:pointer;transition:.15s}
 .tab-btn.active{background:var(--sun);transform:translateY(-2px);box-shadow:0 4px 0 var(--navy)}
-.tab-btn:focus-visible{outline:3px dashed var(--ocean);outline-offset:3px}
 .card{background:var(--white);border:3px solid var(--navy);border-radius:22px;padding:22px;margin-bottom:18px;box-shadow:0 6px 0 rgba(20,55,90,.15)}
-.concept-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-.chip{font-family:'Jua',sans-serif;padding:8px 14px;border:2px solid var(--navy);border-radius:999px;background:#F0F7FF;cursor:pointer;font-size:.95rem}
-.chip.on{background:var(--ocean-light);color:#fff}
-.concept h2{font-size:1.5rem;margin-bottom:4px}
-.concept .easy{background:#FFF6DC;border:2px dashed var(--sun);border-radius:14px;padding:12px 14px;margin:12px 0;font-size:1.02rem;line-height:1.7}
-.concept p{line-height:1.75;font-size:1rem;margin:8px 0}
-.globe-box{display:flex;justify-content:center;margin:14px 0}
 .quiz-info{background:#EFFAF1;border:2px solid var(--land);border-radius:14px;padding:14px;margin-bottom:14px;line-height:1.7}
 .reward-table{width:100%;border-collapse:collapse;margin-top:10px}
 .reward-table th,.reward-table td{border:2px solid var(--navy);padding:9px 8px;text-align:center;font-size:.95rem}
@@ -47,15 +38,23 @@ header{padding:8px 0 4px}
 .progress{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .progress .bar{flex:1;height:14px;background:#DCEBFA;border:2px solid var(--navy);border-radius:999px;overflow:hidden}
 .progress .fill{height:100%;background:var(--land);width:0%;transition:.3s}
-.progress .label{font-family:'Jua',sans-serif}
-.q-text{font-family:'Jua',sans-serif;font-size:1.25rem;line-height:1.5;margin-bottom:16px}
+.progress .label{font-family:'Jua',sans-serif;font-size:.92rem;white-space:nowrap}
+/* 설명(레슨) 화면 */
+.lesson-badge{display:inline-block;font-family:'Jua',sans-serif;background:var(--ocean-light);color:#fff;border:2px solid var(--navy);border-radius:999px;padding:6px 16px;font-size:.95rem;margin-bottom:10px}
+.lesson h2{font-size:1.6rem;margin-bottom:10px}
+.big-say{background:#FFF6DC;border:3px dashed var(--sun);border-radius:16px;padding:16px;font-size:1.15rem;line-height:1.9;margin:12px 0}
+.point-line{display:flex;gap:10px;align-items:flex-start;background:#F5FAFF;border:2px solid #C7D9EA;border-radius:12px;padding:10px 14px;margin:8px 0;font-size:1.05rem;line-height:1.7}
+.point-line .ic{flex:0 0 auto;font-size:1.3rem}
+.globe-box{display:flex;justify-content:center;margin:14px 0}
+/* 문제 화면 */
+.q-text{font-family:'Jua',sans-serif;font-size:1.3rem;line-height:1.55;margin-bottom:16px}
 .opts{display:grid;gap:10px}
-.opt{font-size:1.02rem;text-align:left;padding:13px 16px;border:2px solid var(--navy);border-radius:14px;background:#F5FAFF;cursor:pointer;transition:.12s;font-family:'Gowun Dodum',sans-serif;color:var(--navy)}
+.opt{font-size:1.05rem;text-align:left;padding:14px 16px;border:2px solid var(--navy);border-radius:14px;background:#F5FAFF;cursor:pointer;transition:.12s;font-family:'Gowun Dodum',sans-serif;color:var(--navy)}
 .opt:hover{background:#E3F1FF}
 .opt.correct{background:#C9F0D2;border-color:var(--land);font-weight:bold}
 .opt.wrong{background:#FFD9CC;border-color:var(--coral)}
 .opt:disabled{cursor:default}
-.feedback{margin-top:14px;padding:12px 14px;border-radius:12px;font-size:1rem;line-height:1.6;display:none}
+.feedback{margin-top:14px;padding:12px 14px;border-radius:12px;font-size:1.02rem;line-height:1.7;display:none}
 .feedback.show{display:block}
 .feedback.ok{background:#EFFAF1;border:2px solid var(--land)}
 .feedback.no{background:#FFF0EC;border:2px solid var(--coral)}
@@ -71,8 +70,7 @@ header{padding:8px 0 4px}
 .review{margin-top:16px}
 .review-item{border:2px solid #C7D9EA;border-radius:12px;padding:10px 12px;margin-bottom:8px;font-size:.93rem;line-height:1.6}
 .review-item.wrong-item{border-color:var(--coral);background:#FFF7F4}
-footer{text-align:center;font-size:.85rem;color:#6C8AA6;margin-top:30px}
-/* --- 마지막 미션 --- */
+/* 마지막 미션 */
 .tip-card{display:flex;gap:12px;align-items:flex-start;background:#F5FAFF;border:2px solid var(--navy);border-radius:14px;padding:12px 14px;margin-bottom:10px;line-height:1.65;font-size:.98rem}
 .tip-num{flex:0 0 auto;font-family:'Jua',sans-serif;width:34px;height:34px;border-radius:50%;background:var(--sun);border:2px solid var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
 .script-card{border:2px solid var(--navy);border-radius:14px;margin-bottom:10px;overflow:hidden}
@@ -84,8 +82,9 @@ footer{text-align:center;font-size:.85rem;color:#6C8AA6;margin-top:30px}
 .stamp-row .nm{font-size:.98rem}
 .stamp-btn{flex:0 0 auto;font-family:'Jua',sans-serif;width:64px;height:64px;border-radius:50%;border:3px dashed var(--navy);background:#fff;cursor:pointer;font-size:.8rem;color:#6C8AA6;transition:.15s}
 .stamp-btn.stamped{border-style:solid;border-color:var(--coral);background:#FFE1D6;color:var(--coral);font-size:1.7rem;transform:rotate(-12deg)}
+footer{text-align:center;font-size:.85rem;color:#6C8AA6;margin-top:30px}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
-@media(max-width:480px){header h1{font-size:1.55rem}.q-text{font-size:1.1rem}}
+@media(max-width:480px){.q-text{font-size:1.12rem}.big-say{font-size:1.05rem}}
 </style>
 </head>
 <body>
@@ -162,16 +161,65 @@ footer{text-align:center;font-size:.85rem;color:#6C8AA6;margin-top:30px}
 </header>
 
 <div class="tabs">
-  <button class="tab-btn active" id="tabLearn" onclick="showTab('learn')">📖 공부하기</button>
-  <button class="tab-btn" id="tabQuiz" onclick="showTab('quiz')">✏️ 문제풀기</button>
+  <button class="tab-btn active" id="tabQuiz" onclick="showTab('quiz')">🚀 배우고 바로 풀기</button>
   <button class="tab-btn" id="tabMission" onclick="showTab('mission')">🎤 마지막 미션</button>
 </div>
 
-<!-- ============ 학습 모드 ============ -->
-<section id="learn">
-  <div class="card">
-    <div class="concept-nav" id="conceptNav"></div>
-    <div id="conceptBody"></div>
+<!-- ============ 배우고 바로 풀기 ============ -->
+<section id="quiz">
+  <div class="card" id="quizIntro">
+    <h2 class="jua" style="font-size:1.4rem;margin-bottom:10px">🚀 배우고 바로 풀기!</h2>
+    <div class="quiz-info">
+      이렇게 진행돼! <b>쉬운 설명 → 바로 그 문제 2개</b> → 다음 설명 → 또 문제 2개...<br>
+      방금 배운 걸 바로 풀어서 <b>머리에 콕콕</b> 박히게 하는 거야! 🧠<br>
+      총 <b>5개 설명 + 10문제</b>, 한 문제에 <b>10점</b>이야.
+    </div>
+    <h3 class="jua" style="margin:14px 0 6px">🏆 점수별 약속</h3>
+    <table class="reward-table">
+      <tr><th>점수</th><th>결과</th></tr>
+      <tr class="good"><td>90점 이상</td><td>🚲 자전거 2시간!</td></tr>
+      <tr class="good"><td>80 ~ 89점</td><td>👊 펀치 5번!</td></tr>
+      <tr class="good"><td>70 ~ 79점</td><td>💰 용돈 2,000원!</td></tr>
+      <tr class="retry"><td>70점 미만</td><td>📚 다시 복습하고 재도전!</td></tr>
+    </table>
+    <br>
+    <button class="start-btn" onclick="startFlow()">🚀 출발!</button>
+  </div>
+
+  <!-- 설명 화면 -->
+  <div class="card hidden" id="lessonCard">
+    <div class="progress">
+      <div class="bar"><div class="fill" id="progFill1"></div></div>
+      <div class="label" id="progLabel1"></div>
+    </div>
+    <div class="lesson" id="lessonBody"></div>
+    <br>
+    <button class="next-btn" onclick="afterLesson()">✏️ 좋아! 방금 배운 거 문제 풀기</button>
+  </div>
+
+  <!-- 문제 화면 -->
+  <div class="card hidden" id="quizPlay">
+    <div class="progress">
+      <div class="bar"><div class="fill" id="progFill2"></div></div>
+      <div class="label" id="progLabel2"></div>
+    </div>
+    <div class="q-text" id="qText"></div>
+    <div class="opts" id="qOpts"></div>
+    <div class="feedback" id="qFeedback"></div>
+    <br>
+    <button class="next-btn hidden" id="nextBtn" onclick="nextStep()">다음 ▶</button>
+  </div>
+
+  <!-- 결과 화면 -->
+  <div class="card hidden" id="quizResult">
+    <div class="stars" id="resStars"></div>
+    <div class="score-big" id="resScore"></div>
+    <div class="score-msg" id="resMsg"></div>
+    <div class="reward-banner" id="resReward"></div>
+    <div class="review" id="resReview"></div>
+    <button class="retry-btn" onclick="resetQuiz()">🔄 다시 도전하기</button>
+    <br>
+    <button class="start-btn" onclick="showTab('mission')">🎤 마지막 미션! 엄마에게 설명하러 가기</button>
   </div>
 </section>
 
@@ -202,315 +250,244 @@ footer{text-align:center;font-size:.85rem;color:#6C8AA6;margin-top:30px}
   </div>
 </section>
 
-
-<!-- ============ 퀴즈 모드 ============ -->
-<section id="quiz" class="hidden">
-  <div class="card" id="quizIntro">
-    <h2 class="jua" style="font-size:1.4rem;margin-bottom:10px">✏️ 도전! 지구 탐험 퀴즈</h2>
-    <div class="quiz-info">
-      총 <b>10문제</b>, 한 문제에 <b>10점</b>이야.<br>
-      문제를 풀면 바로 정답과 설명을 알려줄게. 천천히 읽고 골라 보자!
-    </div>
-    <h3 class="jua" style="margin:14px 0 6px">🏆 점수별 약속</h3>
-    <table class="reward-table">
-      <tr><th>점수</th><th>결과</th></tr>
-      <tr class="good"><td>90점 이상</td><td>🚲 자전거 2시간!</td></tr>
-      <tr class="good"><td>80 ~ 89점</td><td>👊 펀치 5번!</td></tr>
-      <tr class="good"><td>70 ~ 79점</td><td>💰 용돈 2,000원!</td></tr>
-      <tr class="retry"><td>70점 미만</td><td>📚 다시 복습하고 재도전!</td></tr>
-    </table>
-    <br>
-    <button class="start-btn" onclick="startQuiz()">🚀 퀴즈 시작!</button>
-  </div>
-
-  <div class="card hidden" id="quizPlay">
-    <div class="progress">
-      <div class="bar"><div class="fill" id="progFill"></div></div>
-      <div class="label" id="progLabel">1 / 10</div>
-    </div>
-    <div class="q-text" id="qText"></div>
-    <div class="opts" id="qOpts"></div>
-    <div class="feedback" id="qFeedback"></div>
-    <br>
-    <button class="next-btn hidden" id="nextBtn" onclick="nextQuestion()">다음 문제 ▶</button>
-  </div>
-
-  <div class="card hidden" id="quizResult">
-    <div class="stars" id="resStars"></div>
-    <div class="score-big" id="resScore"></div>
-    <div class="score-msg" id="resMsg"></div>
-    <div class="reward-banner" id="resReward"></div>
-    <div class="review" id="resReview"></div>
-    <button class="retry-btn" onclick="resetQuiz()">🔄 다시 도전하기</button>
-    <br>
-    <button class="start-btn" onclick="showTab('mission')">🎤 마지막 미션! 엄마에게 설명하러 가기</button>
-  </div>
-</section>
-
 <footer>초등학교 6학년 사회 · 세계 여러 나라의 자연과 문화 단원</footer>
 </div>
 
 <script>
 /* ---------- 지구본 SVG 생성 ---------- */
 function globeSVG(opts){
-  const o = Object.assign({equator:false,latitudes:false,longitudes:false,meridian:false,north:false,south:false,size:260},opts||{});
+  const o=Object.assign({equator:false,latitudes:false,longitudes:false,meridian:false,north:false,south:false,size:250},opts||{});
   const s=o.size,c=s/2,r=s/2-14;
   let inner='';
-  // 바다(구)
-  inner+=`<circle cx="${c}" cy="${c}" r="${r}" fill="#4FA3E3" stroke="#14375A" stroke-width="3"/>`;
-  // 대륙 느낌 (단순 도형)
-  inner+=`<ellipse cx="${c-r*0.35}" cy="${c-r*0.35}" rx="${r*0.32}" ry="${r*0.22}" fill="#58B368" opacity="0.95"/>`;
-  inner+=`<ellipse cx="${c+r*0.30}" cy="${c-r*0.1}" rx="${r*0.2}" ry="${r*0.3}" fill="#58B368" opacity="0.95"/>`;
-  inner+=`<ellipse cx="${c-r*0.2}" cy="${c+r*0.42}" rx="${r*0.26}" ry="${r*0.16}" fill="#58B368" opacity="0.95"/>`;
-  // 반구 색칠
-  if(o.north) inner+=`<path d="M ${c-r},${c} A ${r},${r} 0 0 1 ${c+r},${c} Z" fill="#FFC93C" opacity="0.45"/>`;
-  if(o.south) inner+=`<path d="M ${c-r},${c} A ${r},${r} 0 0 0 ${c+r},${c} Z" fill="#7C4DFF" opacity="0.35"/>`;
-  // 위선(가로줄)
+  inner+='<circle cx="'+c+'" cy="'+c+'" r="'+r+'" fill="#4FA3E3" stroke="#14375A" stroke-width="3"/>';
+  inner+='<ellipse cx="'+(c-r*0.35)+'" cy="'+(c-r*0.35)+'" rx="'+(r*0.32)+'" ry="'+(r*0.22)+'" fill="#58B368"/>';
+  inner+='<ellipse cx="'+(c+r*0.30)+'" cy="'+(c-r*0.1)+'" rx="'+(r*0.2)+'" ry="'+(r*0.3)+'" fill="#58B368"/>';
+  inner+='<ellipse cx="'+(c-r*0.2)+'" cy="'+(c+r*0.42)+'" rx="'+(r*0.26)+'" ry="'+(r*0.16)+'" fill="#58B368"/>';
+  if(o.north) inner+='<path d="M '+(c-r)+','+c+' A '+r+','+r+' 0 0 1 '+(c+r)+','+c+' Z" fill="#FFC93C" opacity="0.45"/>';
+  if(o.south) inner+='<path d="M '+(c-r)+','+c+' A '+r+','+r+' 0 0 0 '+(c+r)+','+c+' Z" fill="#7C4DFF" opacity="0.35"/>';
   if(o.latitudes){
-    [-0.66,-0.33,0.33,0.66].forEach(k=>{
+    [-0.66,-0.33,0.33,0.66].forEach(function(k){
       const y=c+r*k, half=Math.sqrt(r*r-(r*k)*(r*k));
-      inner+=`<line x1="${c-half}" y1="${y}" x2="${c+half}" y2="${y}" stroke="#0E4E86" stroke-width="2" stroke-dasharray="6 5" opacity="0.85"/>`;
+      inner+='<line x1="'+(c-half)+'" y1="'+y+'" x2="'+(c+half)+'" y2="'+y+'" stroke="#0E4E86" stroke-width="2" stroke-dasharray="6 5" opacity="0.85"/>';
     });
   }
-  // 경선(세로 타원)
   if(o.longitudes){
-    [0.33,0.66].forEach(k=>{
-      inner+=`<ellipse cx="${c}" cy="${c}" rx="${r*k}" ry="${r}" fill="none" stroke="#0E4E86" stroke-width="2" stroke-dasharray="6 5" opacity="0.85"/>`;
+    [0.33,0.66].forEach(function(k){
+      inner+='<ellipse cx="'+c+'" cy="'+c+'" rx="'+(r*k)+'" ry="'+r+'" fill="none" stroke="#0E4E86" stroke-width="2" stroke-dasharray="6 5" opacity="0.85"/>';
     });
-    inner+=`<line x1="${c}" y1="${c-r}" x2="${c}" y2="${c+r}" stroke="#0E4E86" stroke-width="2" stroke-dasharray="6 5" opacity="0.5"/>`;
+    inner+='<line x1="'+c+'" y1="'+(c-r)+'" x2="'+c+'" y2="'+(c+r)+'" stroke="#0E4E86" stroke-width="2" stroke-dasharray="6 5" opacity="0.5"/>';
   }
-  // 적도(빨간 굵은 가로선)
   if(o.equator){
-    inner+=`<line x1="${c-r}" y1="${c}" x2="${c+r}" y2="${c}" stroke="#E84545" stroke-width="5"/>`;
-    inner+=`<rect x="${c+r-2}" y="${c-13}" width="52" height="26" rx="13" fill="#E84545"/>`;
-    inner+=`<text x="${c+r+24}" y="${c+5}" font-size="14" fill="#fff" text-anchor="middle" font-family="Jua">적도</text>`;
+    inner+='<line x1="'+(c-r)+'" y1="'+c+'" x2="'+(c+r)+'" y2="'+c+'" stroke="#E84545" stroke-width="5"/>';
+    inner+='<rect x="'+(c+r-2)+'" y="'+(c-13)+'" width="52" height="26" rx="13" fill="#E84545"/>';
+    inner+='<text x="'+(c+r+24)+'" y="'+(c+5)+'" font-size="14" fill="#fff" text-anchor="middle" font-family="Jua">적도</text>';
   }
-  // 본초자오선(보라 세로선)
   if(o.meridian){
-    inner+=`<line x1="${c}" y1="${c-r}" x2="${c}" y2="${c+r}" stroke="#7C4DFF" stroke-width="5"/>`;
-    inner+=`<rect x="${c-45}" y="${c-r-30}" width="90" height="24" rx="12" fill="#7C4DFF"/>`;
-    inner+=`<text x="${c}" y="${c-r-13}" font-size="13" fill="#fff" text-anchor="middle" font-family="Jua">본초자오선</text>`;
+    inner+='<line x1="'+c+'" y1="'+(c-r)+'" x2="'+c+'" y2="'+(c+r)+'" stroke="#7C4DFF" stroke-width="5"/>';
+    inner+='<rect x="'+(c-45)+'" y="'+(c-r-30)+'" width="90" height="24" rx="12" fill="#7C4DFF"/>';
+    inner+='<text x="'+c+'" y="'+(c-r-13)+'" font-size="13" fill="#fff" text-anchor="middle" font-family="Jua">본초자오선</text>';
   }
-  if(o.north) inner+=`<text x="${c}" y="${c-r*0.45}" font-size="17" text-anchor="middle" font-family="Jua" fill="#14375A">북반구 ⬆</text>`;
-  if(o.south) inner+=`<text x="${c}" y="${c+r*0.55}" font-size="17" text-anchor="middle" font-family="Jua" fill="#14375A">남반구 ⬇</text>`;
-  return `<svg width="${s+70}" height="${s+40}" viewBox="-10 -35 ${s+70} ${s+40}" role="img">${inner}</svg>`;
+  if(o.north) inner+='<text x="'+c+'" y="'+(c-r*0.45)+'" font-size="17" text-anchor="middle" font-family="Jua" fill="#14375A">북반구 ⬆</text>';
+  if(o.south) inner+='<text x="'+c+'" y="'+(c+r*0.55)+'" font-size="17" text-anchor="middle" font-family="Jua" fill="#14375A">남반구 ⬇</text>';
+  return '<svg width="'+(s+70)+'" height="'+(s+40)+'" viewBox="-10 -35 '+(s+70)+' '+(s+40)+'" role="img">'+inner+'</svg>';
 }
 
-/* ---------- 개념 학습 데이터 ---------- */
-const concepts=[
- {id:'equator',name:'🔴 적도',title:'적도 (赤道)',
-  easy:'지구 허리를 딱 반으로 나누는 <b>빨간 벨트</b>라고 생각해 봐! 지구에서 가장 뚱뚱한(둘레가 긴) 부분이야.',
-  body:`<p>적도는 지구의 <b>한가운데를 가로로 지나는 선</b>이에요. 적도를 기준으로 지구가 위(북쪽)와 아래(남쪽)로 나뉘어요.</p>
-  <p>적도의 위도는 <b>0도(0°)</b>! 위도를 잴 때 출발점이 되는 아주 중요한 선이에요.</p>
-  <p>💡 적도 근처 나라들(에콰도르, 인도네시아, 케냐 등)은 일 년 내내 아주 더워요!</p>`,
-  globe:{equator:true}},
- {id:'lat',name:'📏 위도',title:'위도와 위선',
-  easy:'아파트 <b>몇 층</b>인지 알려주는 숫자라고 생각해! 적도(0층)에서 위로 갈수록, 아래로 갈수록 숫자가 커져.',
-  body:`<p><b>위선</b>은 적도와 나란하게 그은 <b>가로선</b>이고, <b>위도</b>는 그 선이 적도에서 얼마나 떨어져 있는지 나타내는 숫자예요.</p>
-  <p>적도가 0°, 북극과 남극이 90°! 그래서 위도는 <b>0°부터 90°까지</b> 있어요. 북쪽이면 북위, 남쪽이면 남위라고 불러요.</p>
-  <p>💡 우리나라 서울은 대략 <b>북위 37°</b>에 있어요.</p>`,
-  globe:{equator:true,latitudes:true}},
- {id:'lon',name:'📐 경도',title:'경도와 경선',
-  easy:'수박 자를 때 생기는 <b>세로 줄무늬</b>를 떠올려 봐! 북극에서 남극까지 세로로 그은 선이야.',
-  body:`<p><b>경선</b>은 북극과 남극을 잇는 <b>세로선</b>이고, <b>경도</b>는 본초자오선에서 동쪽이나 서쪽으로 얼마나 떨어져 있는지 나타내는 숫자예요.</p>
-  <p>본초자오선이 0°, 그리고 동쪽으로 180°, 서쪽으로 180°까지! 그래서 경도는 <b>0°부터 180°까지</b> 있어요. 동쪽이면 동경, 서쪽이면 서경이에요.</p>
-  <p>💡 우리나라는 대략 <b>동경 127°</b>에 있어요. 경도가 다르면 시간(시차)도 달라져요!</p>`,
-  globe:{meridian:true,longitudes:true}},
- {id:'hemi',name:'🌗 북반구·남반구',title:'북반구와 남반구',
-  easy:'사과를 가로로 반 자르면 <b>윗조각과 아랫조각</b>이 생기지? 지구도 적도로 자르면 위쪽이 북반구, 아래쪽이 남반구야!',
-  body:`<p>적도를 기준으로 <b>위쪽(북쪽) 절반이 북반구</b>, <b>아래쪽(남쪽) 절반이 남반구</b>예요.</p>
-  <p>우리나라, 중국, 미국, 유럽은 모두 <b>북반구</b>에 있고, 호주(오스트레일리아), 뉴질랜드, 아르헨티나는 <b>남반구</b>에 있어요.</p>
-  <p>💡 북반구가 여름일 때 남반구는 겨울! 그래서 호주에서는 <b>크리스마스가 한여름</b>이에요. 산타가 반바지를 입을지도? 🎅🩳</p>`,
-  globe:{equator:true,north:true,south:true}},
- {id:'meridian',name:'💜 본초자오선',title:'본초자오선',
-  easy:'달리기 경주의 <b>출발선</b>! 경도를 재기 시작하는 기준이 되는 세로선이야.',
-  body:`<p>본초자오선은 <b>경도 0°인 세로선</b>이에요. 세계 여러 나라가 "경도를 어디서부터 잴까?" 고민하다가 <b>영국 런던의 그리니치 천문대</b>를 지나는 선을 기준으로 정했어요.</p>
-  <p>본초자오선을 기준으로 지구는 <b>동반구</b>(동쪽 절반)와 <b>서반구</b>(서쪽 절반)로 나뉘어요.</p>
-  <p>💡 세계의 시간도 이 선을 기준으로 정해져요. 그리니치를 기준으로 한 시간을 '그리니치 표준시(GMT)'라고 해요!</p>`,
-  globe:{meridian:true,equator:true}}
+/* ---------- 레슨(아주 쉬운 설명) + 문제 데이터 ---------- */
+const lessons=[
+ {
+  emoji:'🔴', title:'적도',
+  say:'지구가 커다란 <b>수박</b>이라고 생각해 봐!<br>수박 <b>배꼽(허리)</b>을 빙 두른 빨간 줄, 그게 바로 <b>적도</b>야!',
+  points:[
+   '➡️ 적도는 지구 <b>한가운데를 가로로</b> 지나는 선이야.',
+   '0️⃣ 적도의 위도는 <b>0도</b>! 여기서부터 재기 시작해.',
+   '🔥 적도 근처는 햇빛을 제일 많이 받아서 <b>일 년 내내 더워</b>!'
+  ],
+  globe:{equator:true},
+  qs:[
+   {q:'지구 한가운데를 가로로 지나는, 지구의 허리띠 같은 선은?',
+    opts:['본초자오선','적도','경선','날짜변경선'],a:1,
+    exp:'딩동댕! 수박 허리의 빨간 줄 = 적도!'},
+   {q:'적도의 위도는 몇 도(°)일까?',
+    opts:['90도','100도','0도','180도'],a:2,
+    exp:'적도는 위도를 재는 출발점이라서 0도야!'}
+  ]
+ },
+ {
+  emoji:'📏', title:'위도',
+  say:'우리 아파트에서 "<b>나 5층 살아!</b>" 하면 위치를 알 수 있지?<br><b>위도</b>는 지구의 <b>층수</b>야! 적도가 <b>0층</b>이고, 위·아래로 갈수록 숫자가 커져!',
+  points:[
+   '➖ 적도랑 나란한 <b>가로선</b>을 <b>위선</b>이라고 불러.',
+   '🔢 적도가 0도, 북극·남극이 90도. 그래서 위도는 <b>0도~90도</b>까지!',
+   '⬆️ 적도보다 위면 <b>북위</b>, ⬇️ 아래면 <b>남위</b>. 서울은 북위 37도쯤!'
+  ],
+  globe:{equator:true,latitudes:true},
+  qs:[
+   {q:'적도와 나란하게 그은 가로선의 이름은?',
+    opts:['경선','자오선','위선','수평선'],a:2,
+    exp:'가로선 = 위선! "위도를 알려주는 선"이라고 기억하자.'},
+   {q:'위도는 몇 도부터 몇 도까지 있을까?',
+    opts:['0° ~ 90°','0° ~ 180°','0° ~ 360°','0° ~ 100°'],a:0,
+    exp:'적도가 0도, 북극·남극이 90도니까 0°~90°!'}
+  ]
+ },
+ {
+  emoji:'📐', title:'경도',
+  say:'이번엔 수박의 <b>세로 줄무늬</b>를 봐!<br>북극에서 남극까지 <b>세로로</b> 그은 선이 <b>경선</b>, 그 위치 숫자가 <b>경도</b>야!',
+  points:[
+   '｜ 북극~남극을 잇는 <b>세로선</b> = <b>경선</b>!',
+   '🔢 경도는 <b>0도~180도</b>까지 있어. (위도보다 2배 커!)',
+   '⏰ 경도가 다르면 <b>시간도 달라</b>! 그래서 미국은 우리랑 밤낮이 반대야.'
+  ],
+  globe:{meridian:true,longitudes:true},
+  qs:[
+   {q:'북극과 남극을 세로로 잇는 선의 이름은?',
+    opts:['위선','적도','경선','지평선'],a:2,
+    exp:'세로선 = 경선! 수박 줄무늬를 떠올려!'},
+   {q:'경도는 몇 도부터 몇 도까지 있을까?',
+    opts:['0° ~ 90°','0° ~ 180°','0° ~ 360°','0° ~ 45°'],a:1,
+    exp:'경도는 0°~180°! 위도(90°)의 딱 2배라고 기억하면 쉬워.'}
+  ]
+ },
+ {
+  emoji:'🌗', title:'북반구와 남반구',
+  say:'사과를 <b>가로로 반</b> 자르면? 윗조각, 아랫조각!<br>지구도 적도로 자르면 <b>위쪽 = 북반구</b>, <b>아래쪽 = 남반구</b>야!',
+  points:[
+   '⬆️ 우리나라, 중국, 미국은 <b>북반구</b>!',
+   '⬇️ 호주, 뉴질랜드는 <b>남반구</b>!',
+   '🔄 북반구와 남반구는 <b>계절이 반대</b>! 호주 크리스마스는 한여름이야! 🎅🩳'
+  ],
+  globe:{equator:true,north:true,south:true},
+  qs:[
+   {q:'우리나라(대한민국)는 어느 반구에 있을까?',
+    opts:['남반구','북반구','서반구에만 있다','적도 위에 있다'],a:1,
+    exp:'우리나라는 적도보다 위(북쪽)! 그래서 북반구야.'},
+   {q:'북반구가 여름일 때, 남반구(호주)의 계절은?',
+    opts:['여름','봄','겨울','가을'],a:2,
+    exp:'계절이 반대! 그래서 호주 산타는 반바지를 입을지도? 🎅'}
+  ]
+ },
+ {
+  emoji:'💜', title:'본초자오선',
+  say:'달리기 시합엔 <b>출발선</b>이 필요하지?<br>경도를 재는 출발선이 바로 <b>본초자오선</b>이야! <b>경도 0도</b>!',
+  points:[
+   '🏁 본초자오선 = <b>경도 0도</b>인 세로선!',
+   '🇬🇧 <b>영국</b> 런던의 <b>그리니치 천문대</b>를 지나가!',
+   '🌓 이 선을 기준으로 지구가 <b>동반구·서반구</b>로 나뉘어.'
+  ],
+  globe:{meridian:true,equator:true},
+  qs:[
+   {q:'경도 0°인 기준선(경도의 출발선)의 이름은?',
+    opts:['본초자오선','적도','북회귀선','위선'],a:0,
+    exp:'경도의 출발선 = 본초자오선! 위도의 출발선은 적도!'},
+   {q:'본초자오선이 지나가는 그리니치 천문대가 있는 나라는?',
+    opts:['프랑스','영국','미국','독일'],a:1,
+    exp:'영국 런던의 그리니치 천문대! 세계 시간의 기준이 되는 곳이야.'}
+  ]
+ }
 ];
 
-const nav=document.getElementById('conceptNav');
-concepts.forEach((cp,i)=>{
-  const b=document.createElement('button');
-  b.className='chip'+(i===0?' on':'');
-  b.textContent=cp.name;
-  b.onclick=()=>showConcept(i);
-  nav.appendChild(b);
-});
-function showConcept(i){
-  document.querySelectorAll('.chip').forEach((c,j)=>c.classList.toggle('on',j===i));
-  const cp=concepts[i];
-  document.getElementById('conceptBody').innerHTML=
-   `<div class="concept">
-     <h2>${cp.title}</h2>
-     <div class="easy">🧒 쉽게 말하면? ${cp.easy}</div>
-     <div class="globe-box">${globeSVG(cp.globe)}</div>
-     ${cp.body}
-    </div>`;
-}
-showConcept(0);
-
-/* ---------- 퀴즈 데이터 ---------- */
-const questions=[
- {q:'지구 한가운데를 가로로 지나며, 지구를 북쪽과 남쪽으로 나누는 선은?',
-  opts:['본초자오선','적도','경선','날짜변경선'],a:1,
-  exp:'적도는 지구 허리를 가로로 지나는 선으로, 위도 0°야!'},
- {q:'적도를 기준으로 지구의 위쪽(북쪽) 절반을 무엇이라고 할까?',
-  opts:['남반구','동반구','북반구','서반구'],a:2,
-  exp:'적도 위쪽은 북반구, 아래쪽은 남반구야.'},
- {q:'위도가 0°인 곳은 어디일까?',
-  opts:['북극','남극','본초자오선','적도'],a:3,
-  exp:'위도는 적도에서부터 재기 시작해. 그래서 적도가 위도 0°!'},
- {q:'경도가 0°인 기준선의 이름은?',
-  opts:['본초자오선','적도','북회귀선','위선'],a:0,
-  exp:'경도의 출발선은 본초자오선! 영국 그리니치 천문대를 지나가.'},
- {q:'본초자오선이 지나가는 곳으로 유명한 천문대가 있는 나라는?',
-  opts:['프랑스','영국','미국','독일'],a:1,
-  exp:'영국 런던의 그리니치 천문대를 지나는 선이 본초자오선이야.'},
- {q:'적도와 나란하게 그은 가로선을 무엇이라고 할까?',
-  opts:['경선','자오선','위선','수평선'],a:2,
-  exp:'가로선은 위선(위도를 나타내는 선), 세로선은 경선이야.'},
- {q:'북극과 남극을 세로로 잇는 선을 무엇이라고 할까?',
-  opts:['위선','적도','경선','지평선'],a:2,
-  exp:'북극~남극을 잇는 세로선이 경선이고, 경도를 나타내 줘.'},
- {q:'우리나라(대한민국)는 어느 반구에 있을까?',
-  opts:['남반구','북반구','서반구에만 있다','적도 위에 있다'],a:1,
-  exp:'우리나라는 적도보다 위(북쪽)에 있으니까 북반구야! (북위 약 33~43°)'},
- {q:'위도는 몇 도(°)부터 몇 도까지 있을까?',
-  opts:['0° ~ 90°','0° ~ 180°','0° ~ 360°','0° ~ 100°'],a:0,
-  exp:'적도가 0°, 북극과 남극이 90°니까 위도는 0°~90°까지야.'},
- {q:'북반구가 여름일 때, 남반구의 계절은?',
-  opts:['여름','봄','겨울','가을'],a:2,
-  exp:'북반구와 남반구는 계절이 반대! 그래서 호주는 크리스마스가 한여름이야. 🎅'}
-];
-
-let qIndex=0, score=0, answered=false, wrongList=[];
+/* ---------- 진행 흐름: 설명 → 문제2개 → 설명 → 문제2개 ... ---------- */
+let li=0, qi=0, score=0, answered=false, wrongList=[];
+const TOTAL_Q=10;
 
 function showTab(t){
-  document.getElementById('learn').classList.toggle('hidden',t!=='learn');
   document.getElementById('quiz').classList.toggle('hidden',t!=='quiz');
   document.getElementById('mission').classList.toggle('hidden',t!=='mission');
-  document.getElementById('tabLearn').classList.toggle('active',t==='learn');
   document.getElementById('tabQuiz').classList.toggle('active',t==='quiz');
   document.getElementById('tabMission').classList.toggle('active',t==='mission');
 }
 
-/* ---------- 마지막 미션: 설명 대본 ---------- */
-const scripts=[
- {t:'🔴 적도 설명하기',s:[
-  '엄마, 지구가 커다란 <b>수박</b>이라고 생각해 봐!',
-  '수박 허리를 딱 반으로 자르는 선이 있는데, 그게 바로 <b>적도</b>야.',
-  '적도는 지구에서 제일 뚱뚱한 부분이고, <b>위도 0도</b>야. 여기서부터 위도를 재기 시작해!',
-  '그래서 적도 근처 나라들은 일 년 내내 엄청 더워. 에콰도르, 케냐 같은 나라들!']},
- {t:'📏 위도 설명하기',s:[
-  '엄마, 우리 아파트 <b>몇 층</b>인지 말하면 위치를 알 수 있잖아?',
-  '위도도 똑같아! 적도가 <b>0층(0도)</b>이고, 북극·남극 쪽으로 갈수록 숫자가 커져서 <b>90도</b>까지 있어.',
-  '적도보다 위면 <b>북위</b>, 아래면 <b>남위</b>라고 불러.',
-  '우리나라 서울은 북위 37도쯤이야. 지구 아파트 37층에 사는 셈이지!']},
- {t:'📐 경도 설명하기',s:[
-  '이번엔 수박의 <b>세로 줄무늬</b>를 봐, 엄마!',
-  '북극에서 남극까지 세로로 그은 선이 <b>경선</b>이고, 그 위치를 숫자로 나타낸 게 <b>경도</b>야.',
-  '경도는 본초자오선이 0도이고, 동쪽·서쪽으로 <b>180도</b>까지 있어.',
-  '경도가 다르면 <b>시간도 달라져</b>! 그래서 미국은 우리랑 낮과 밤이 반대야.']},
- {t:'🌗 북반구·남반구 설명하기',s:[
-  '엄마, 사과를 가로로 반 자르면 윗조각·아랫조각이 생기지?',
-  '지구도 적도로 자르면 위쪽이 <b>북반구</b>, 아래쪽이 <b>남반구</b>야.',
-  '우리나라는 북반구에 있고, 호주는 남반구에 있어.',
-  '신기한 건 계절이 <b>반대</b>라는 거야! 우리가 겨울일 때 호주는 여름이라서, 호주 산타는 반바지를 입을지도 몰라! 🎅🩳']},
- {t:'💜 본초자오선 설명하기',s:[
-  '엄마, 달리기 시합엔 <b>출발선</b>이 있어야 하잖아?',
-  '경도를 재는 출발선이 바로 <b>본초자오선</b>이야. 경도 0도!',
-  '세계 여러 나라가 회의해서 <b>영국 그리니치 천문대</b>를 지나는 선으로 정했어.',
-  '이 선을 기준으로 지구가 동반구와 서반구로 나뉘고, 세계 시간도 여기를 기준으로 정해!']}
-];
-
-const scBox=document.getElementById('scriptCards');
-scripts.forEach((sc,i)=>{
-  const d=document.createElement('div');d.className='script-card';
-  d.innerHTML=`<button onclick="this.parentElement.classList.toggle('open')">${sc.t} ▾</button>
-   <div class="script-body">${sc.s.map(line=>`<div class="bubble">🗣️ ${line}</div>`).join('')}</div>`;
-  scBox.appendChild(d);
-});
-
-/* ---------- 엄마 확인 도장판 ---------- */
-const stampItems=['적도를 비유로 설명했어요','위도를 설명했어요','경도를 설명했어요','북반구·남반구를 설명했어요','본초자오선을 설명하고 엄마에게 퀴즈도 냈어요'];
-const stBox=document.getElementById('stampBoard');
-stampItems.forEach((nm,i)=>{
-  const row=document.createElement('div');row.className='stamp-row';
-  row.innerHTML=`<div class="nm">${i+1}. ${nm}</div><button class="stamp-btn" id="stamp${i}" onclick="toggleStamp(${i})">엄마<br>도장</button>`;
-  stBox.appendChild(row);
-});
-function toggleStamp(i){
-  const b=document.getElementById('stamp'+i);
-  b.classList.toggle('stamped');
-  b.innerHTML=b.classList.contains('stamped')?'💮':'엄마<br>도장';
-  const all=stampItems.every((_,j)=>document.getElementById('stamp'+j).classList.contains('stamped'));
-  document.getElementById('missionDone').classList.toggle('hidden',!all);
-}
-
-function startQuiz(){
-  qIndex=0;score=0;wrongList=[];
+function startFlow(){
+  li=0;qi=0;score=0;wrongList=[];
   document.getElementById('quizIntro').classList.add('hidden');
   document.getElementById('quizResult').classList.add('hidden');
-  document.getElementById('quizPlay').classList.remove('hidden');
-  renderQuestion();
+  showLesson();
 }
 
-function renderQuestion(){
+function doneCount(){ return li*2+qi; }
+
+function showLesson(){
+  document.getElementById('quizPlay').classList.add('hidden');
+  const card=document.getElementById('lessonCard');
+  card.classList.remove('hidden');
+  const L=lessons[li];
+  document.getElementById('progLabel1').textContent='설명 '+(li+1)+' / 5';
+  document.getElementById('progFill1').style.width=(doneCount()/TOTAL_Q*100)+'%';
+  document.getElementById('lessonBody').innerHTML=
+   '<span class="lesson-badge">'+(li+1)+'번째 이야기</span>'+
+   '<h2>'+L.emoji+' '+L.title+'</h2>'+
+   '<div class="big-say">🧒 '+L.say+'</div>'+
+   '<div class="globe-box">'+globeSVG(L.globe)+'</div>'+
+   L.points.map(function(p){return '<div class="point-line"><span class="ic">✔️</span><div>'+p+'</div></div>';}).join('');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function afterLesson(){
+  document.getElementById('lessonCard').classList.add('hidden');
+  qi=0;
+  showQuestion();
+}
+
+function showQuestion(){
   answered=false;
-  const q=questions[qIndex];
-  document.getElementById('progLabel').textContent=`${qIndex+1} / ${questions.length}`;
-  document.getElementById('progFill').style.width=`${(qIndex)/questions.length*100}%`;
-  document.getElementById('qText').textContent=`Q${qIndex+1}. ${q.q}`;
+  document.getElementById('quizPlay').classList.remove('hidden');
+  const L=lessons[li], q=L.qs[qi], num=doneCount()+1;
+  document.getElementById('progLabel2').textContent='문제 '+num+' / '+TOTAL_Q+' · '+L.emoji+' '+L.title;
+  document.getElementById('progFill2').style.width=((num-1)/TOTAL_Q*100)+'%';
+  document.getElementById('qText').textContent='Q'+num+'. '+q.q;
   const box=document.getElementById('qOpts');box.innerHTML='';
-  q.opts.forEach((op,i)=>{
+  q.opts.forEach(function(op,i){
     const b=document.createElement('button');
-    b.className='opt';b.textContent=`${['①','②','③','④'][i]} ${op}`;
-    b.onclick=()=>choose(i,b);
+    b.className='opt';b.textContent=['①','②','③','④'][i]+' '+op;
+    b.onclick=function(){choose(i,b);};
     box.appendChild(b);
   });
   const fb=document.getElementById('qFeedback');
   fb.className='feedback';fb.textContent='';
   document.getElementById('nextBtn').classList.add('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function choose(i,btn){
   if(answered)return;answered=true;
-  const q=questions[qIndex];
+  const q=lessons[li].qs[qi];
   const opts=document.querySelectorAll('.opt');
-  opts.forEach(o=>o.disabled=true);
+  opts.forEach(function(o){o.disabled=true;});
   const fb=document.getElementById('qFeedback');
   if(i===q.a){
     score+=10;btn.classList.add('correct');
     fb.className='feedback show ok';
-    fb.innerHTML=`⭕ <b>정답이야! +10점</b><br>${q.exp}`;
+    fb.innerHTML='⭕ <b>정답이야! +10점</b><br>'+q.exp;
   }else{
     btn.classList.add('wrong');opts[q.a].classList.add('correct');
     fb.className='feedback show no';
-    fb.innerHTML=`❌ <b>아쉽다!</b> 정답은 「${q.opts[q.a]}」<br>${q.exp}`;
+    fb.innerHTML='❌ <b>아쉽다!</b> 정답은 「'+q.opts[q.a]+'」<br>'+q.exp;
     wrongList.push(q);
   }
   const nb=document.getElementById('nextBtn');
-  nb.textContent=(qIndex===questions.length-1)?'🏁 결과 보기':'다음 문제 ▶';
+  const isLast=(li===lessons.length-1 && qi===lessons[li].qs.length-1);
+  nb.textContent=isLast?'🏁 결과 보기':(qi===lessons[li].qs.length-1?'📖 다음 이야기 배우러 가기':'다음 문제 ▶');
   nb.classList.remove('hidden');
 }
 
-function nextQuestion(){
-  qIndex++;
-  if(qIndex<questions.length){renderQuestion();}
-  else{showResult();}
+function nextStep(){
+  qi++;
+  if(qi<lessons[li].qs.length){ showQuestion(); return; }
+  li++; qi=0;
+  if(li<lessons.length){ document.getElementById('quizPlay').classList.add('hidden'); showLesson(); }
+  else{ showResult(); }
 }
 
 function showResult(){
   document.getElementById('quizPlay').classList.add('hidden');
+  document.getElementById('lessonCard').classList.add('hidden');
   const res=document.getElementById('quizResult');
   res.classList.remove('hidden');
-  document.getElementById('resScore').textContent=`${score}점`;
+  document.getElementById('resScore').textContent=score+'점';
   const starCount=Math.max(1,Math.round(score/20));
   document.getElementById('resStars').textContent='⭐'.repeat(starCount)+'☆'.repeat(5-starCount);
 
-  let banner=document.getElementById('resReward'), msg=document.getElementById('resMsg');
+  const banner=document.getElementById('resReward'), msg=document.getElementById('resMsg');
   if(score>=90){
     banner.className='reward-banner tier1';
     banner.innerHTML='🚲 <b>자전거 2시간 획득!</b><br>지구 박사님 인정! 최고야 하준!';
@@ -526,7 +503,7 @@ function showResult(){
   }else{
     banner.className='reward-banner tier4';
     banner.innerHTML='📚 <b>다시 복습하고 재도전!</b><br>괜찮아, 틀리면서 배우는 거야!';
-    msg.textContent='아래 틀린 문제를 다시 읽어 보고, 공부하기 탭에서 복습한 뒤 재도전해 보자!';
+    msg.textContent='아래 틀린 문제를 다시 읽어 보고 재도전해 보자!';
   }
 
   const rv=document.getElementById('resReview');
@@ -534,14 +511,68 @@ function showResult(){
     rv.innerHTML='<div class="review-item">🎉 틀린 문제가 하나도 없어! 대단해!</div>';
   }else{
     rv.innerHTML='<h3 class="jua" style="margin-bottom:8px">📝 틀린 문제 다시 보기</h3>'+
-      wrongList.map(q=>`<div class="review-item wrong-item"><b>Q. ${q.q}</b><br>✅ 정답: ${q.opts[q.a]}<br>💡 ${q.exp}</div>`).join('');
+      wrongList.map(function(q){return '<div class="review-item wrong-item"><b>Q. '+q.q+'</b><br>✅ 정답: '+q.opts[q.a]+'<br>💡 '+q.exp+'</div>';}).join('');
   }
   rv.insertAdjacentHTML('beforeend','<br>');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function resetQuiz(){
   document.getElementById('quizResult').classList.add('hidden');
   document.getElementById('quizIntro').classList.remove('hidden');
+}
+
+/* ---------- 마지막 미션: 설명 대본 ---------- */
+const scripts=[
+ {t:'🔴 적도 설명하기',s:[
+  '엄마, 지구가 커다란 <b>수박</b>이라고 생각해 봐!',
+  '수박 허리를 딱 반으로 자르는 선이 있는데, 그게 바로 <b>적도</b>야.',
+  '적도는 지구에서 제일 뚱뚱한 부분이고, <b>위도 0도</b>야. 여기서부터 위도를 재기 시작해!',
+  '그래서 적도 근처 나라들은 일 년 내내 엄청 더워!']},
+ {t:'📏 위도 설명하기',s:[
+  '엄마, 우리 아파트 <b>몇 층</b>인지 말하면 위치를 알 수 있잖아?',
+  '위도도 똑같아! 적도가 <b>0층(0도)</b>이고, 북극·남극 쪽으로 갈수록 숫자가 커져서 <b>90도</b>까지 있어.',
+  '적도보다 위면 <b>북위</b>, 아래면 <b>남위</b>라고 불러.',
+  '우리나라 서울은 북위 37도쯤이야. 지구 아파트 37층에 사는 셈이지!']},
+ {t:'📐 경도 설명하기',s:[
+  '이번엔 수박의 <b>세로 줄무늬</b>를 봐, 엄마!',
+  '북극에서 남극까지 세로로 그은 선이 <b>경선</b>이고, 그 위치를 숫자로 나타낸 게 <b>경도</b>야.',
+  '경도는 본초자오선이 0도이고, 동쪽·서쪽으로 <b>180도</b>까지 있어.',
+  '경도가 다르면 <b>시간도 달라져</b>! 그래서 미국은 우리랑 낮과 밤이 반대야.']},
+ {t:'🌗 북반구·남반구 설명하기',s:[
+  '엄마, 사과를 가로로 반 자르면 윗조각·아랫조각이 생기지?',
+  '지구도 적도로 자르면 위쪽이 <b>북반구</b>, 아래쪽이 <b>남반구</b>야.',
+  '우리나라는 북반구에 있고, 호주는 남반구에 있어.',
+  '신기한 건 계절이 <b>반대</b>라는 거야! 호주 산타는 반바지를 입을지도 몰라! 🎅🩳']},
+ {t:'💜 본초자오선 설명하기',s:[
+  '엄마, 달리기 시합엔 <b>출발선</b>이 있어야 하잖아?',
+  '경도를 재는 출발선이 바로 <b>본초자오선</b>이야. 경도 0도!',
+  '세계 여러 나라가 회의해서 <b>영국 그리니치 천문대</b>를 지나는 선으로 정했어.',
+  '이 선을 기준으로 지구가 동반구와 서반구로 나뉘어!']}
+];
+
+const scBox=document.getElementById('scriptCards');
+scripts.forEach(function(sc){
+  const d=document.createElement('div');d.className='script-card';
+  d.innerHTML='<button onclick="this.parentElement.classList.toggle(\'open\')">'+sc.t+' ▾</button>'+
+   '<div class="script-body">'+sc.s.map(function(line){return '<div class="bubble">🗣️ '+line+'</div>';}).join('')+'</div>';
+  scBox.appendChild(d);
+});
+
+/* ---------- 엄마 확인 도장판 ---------- */
+const stampItems=['적도를 비유로 설명했어요','위도를 설명했어요','경도를 설명했어요','북반구·남반구를 설명했어요','본초자오선을 설명하고 엄마에게 퀴즈도 냈어요'];
+const stBox=document.getElementById('stampBoard');
+stampItems.forEach(function(nm,i){
+  const row=document.createElement('div');row.className='stamp-row';
+  row.innerHTML='<div class="nm">'+(i+1)+'. '+nm+'</div><button class="stamp-btn" id="stamp'+i+'" onclick="toggleStamp('+i+')">엄마<br>도장</button>';
+  stBox.appendChild(row);
+});
+function toggleStamp(i){
+  const b=document.getElementById('stamp'+i);
+  b.classList.toggle('stamped');
+  b.innerHTML=b.classList.contains('stamped')?'💮':'엄마<br>도장';
+  const all=stampItems.every(function(_,j){return document.getElementById('stamp'+j).classList.contains('stamped');});
+  document.getElementById('missionDone').classList.toggle('hidden',!all);
 }
 </script>
 </body>
