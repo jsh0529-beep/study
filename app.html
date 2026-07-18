@@ -212,6 +212,7 @@ footer a{color:var(--green);font-weight:700;text-decoration:none}
     <div class="field"><label>이름 (별명도 좋아)</label><input id="obName" placeholder="예: 민준"></div>
     <div class="field"><label>요즘 제일 좋아하는 것 — 쌤이 이걸로 비유해서 설명해 줄게!</label><input id="obInterest" placeholder="예: 축구, 로블록스, 아이돌, 요리"></div>
     <div class="field"><label>연결 주소 (부모님이 넣어주세요 — GAS 웹앱 URL)</label><input id="obGas" placeholder="https://script.google.com/macros/s/.../exec"></div>
+    <div class="field"><label>부모님 이메일 (선택 — 매주 일요일 학습 브리핑을 보내드려요)</label><input id="obEmail" type="email" placeholder="parent@example.com"></div>
     <button class="btn btn-green" style="width:100%" onclick="finishOnboard()">시작하기 🚀</button>
   </div>
 </div>
@@ -223,6 +224,7 @@ footer a{color:var(--green);font-weight:700;text-decoration:none}
     <div class="field"><label>이름</label><input id="stName"></div>
     <div class="field"><label>관심사 (비유 엔진)</label><input id="stInterest"></div>
     <div class="field"><label>GAS 웹앱 URL</label><input id="stGas"></div>
+    <div class="field"><label>부모님 이메일 (주간 브리핑 수신)</label><input id="stEmail" type="email" placeholder="parent@example.com"></div>
     <div class="field"><label>《돈의 언어》 구매 링크 (책 배너에 연결)</label><input id="stBook" placeholder="교보문고/알라딘 상품 URL"></div>
     <div style="display:flex;gap:8px">
       <button class="btn btn-green" style="flex:1" onclick="saveSettings()">저장</button>
@@ -544,7 +546,7 @@ function logToSheet(){
   if(!S.cfg||!S.cfg.gasUrl) return;
   const today=S.records.filter(r=>new Date(r.d).toDateString()===new Date().toDateString());
   fetch(S.cfg.gasUrl,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body:JSON.stringify({action:'log',name:S.cfg.name,subject:S.subject,unit:S.unit,mode:S.mode,
+    body:JSON.stringify({action:'log',name:S.cfg.name,parentEmail:S.cfg.parentEmail||'',subject:S.subject,unit:S.unit,mode:S.mode,
       todayOk:today.filter(r=>r.ok).length,todayAll:today.length,
       lastReason:(S.records.slice(-1)[0]||{}).reason||''})
   }).catch(()=>{});
@@ -555,9 +557,10 @@ function finishOnboard(){
   const name=document.getElementById('obName').value.trim();
   const interest=document.getElementById('obInterest').value.trim();
   const gasUrl=document.getElementById('obGas').value.trim();
+  const parentEmail=document.getElementById('obEmail').value.trim();
   if(!name||!interest){alert('이름과 관심사를 알려줘!');return;}
   if(!gasUrl){alert('GAS 웹앱 URL이 필요해요. 부모님께 부탁해 주세요!');return;}
-  S.cfg={name,interest,gasUrl,bookUrl:''};
+  S.cfg={name,interest,gasUrl,parentEmail,bookUrl:''};
   localStorage.setItem('tutor_cfg',JSON.stringify(S.cfg));
   document.getElementById('mdOnboard').classList.remove('on');
   renderHome();
@@ -567,6 +570,7 @@ function openSettings(){
   document.getElementById('stName').value=S.cfg.name;
   document.getElementById('stInterest').value=S.cfg.interest;
   document.getElementById('stGas').value=S.cfg.gasUrl;
+  document.getElementById('stEmail').value=S.cfg.parentEmail||'';
   document.getElementById('stBook').value=S.cfg.bookUrl||'';
   document.getElementById('mdSettings').classList.add('on');
 }
@@ -574,6 +578,7 @@ function saveSettings(){
   S.cfg.name=document.getElementById('stName').value.trim();
   S.cfg.interest=document.getElementById('stInterest').value.trim();
   S.cfg.gasUrl=document.getElementById('stGas').value.trim();
+  S.cfg.parentEmail=document.getElementById('stEmail').value.trim();
   S.cfg.bookUrl=document.getElementById('stBook').value.trim();
   localStorage.setItem('tutor_cfg',JSON.stringify(S.cfg));
   closeModal();renderHome();
