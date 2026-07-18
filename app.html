@@ -211,7 +211,6 @@ footer a{color:var(--green);font-weight:700;text-decoration:none}
     <p class="small" style="margin-bottom:14px">쌤이 너한테 딱 맞게 가르치려면 세 가지만 알려줘.</p>
     <div class="field"><label>이름 (별명도 좋아)</label><input id="obName" placeholder="예: 민준"></div>
     <div class="field"><label>요즘 제일 좋아하는 것 — 쌤이 이걸로 비유해서 설명해 줄게!</label><input id="obInterest" placeholder="예: 축구, 로블록스, 아이돌, 요리"></div>
-    <div class="field"><label>연결 주소 (부모님이 넣어주세요 — GAS 웹앱 URL)</label><input id="obGas" placeholder="https://script.google.com/macros/s/.../exec"></div>
     <div class="field"><label>부모님 이메일 (선택 — 매주 일요일 학습 브리핑을 보내드려요)</label><input id="obEmail" type="email" placeholder="parent@example.com"></div>
     <button class="btn btn-green" style="width:100%" onclick="finishOnboard()">시작하기 🚀</button>
   </div>
@@ -223,7 +222,6 @@ footer a{color:var(--green);font-weight:700;text-decoration:none}
     <h3>설정</h3>
     <div class="field"><label>이름</label><input id="stName"></div>
     <div class="field"><label>관심사 (비유 엔진)</label><input id="stInterest"></div>
-    <div class="field"><label>GAS 웹앱 URL</label><input id="stGas"></div>
     <div class="field"><label>부모님 이메일 (주간 브리핑 수신)</label><input id="stEmail" type="email" placeholder="parent@example.com"></div>
     <div class="field"><label>《돈의 언어》 구매 링크 (책 배너에 연결)</label><input id="stBook" placeholder="교보문고/알라딘 상품 URL"></div>
     <div style="display:flex;gap:8px">
@@ -278,6 +276,9 @@ const BREAK_QUIZ = [
  {q:"나라 살림에 쓰려고 국민에게 걷는 돈은?",o:["이자","세금","회비","벌금"],a:1,exp:"세금! 학교, 도로, 병원… 우리가 쓰는 많은 것이 세금으로 만들어져."},
  {q:"회사의 주인이 되는 증서를 사고파는 것은?",o:["채권","주식","적금","보험"],a:1,exp:"주식! 주식을 사면 그 회사의 아주 작은 주인이 되는 거야."}
 ];
+
+/* ══════════════ 연결 주소 (고정) ══════════════ */
+const GAS_URL='https://script.google.com/macros/s/AKfycbwIlBXenOZhH5TaTQQKHimQNRCcnZXqBDUF7WIscz49vwX3L70cZIMfny7c857VigNF/exec';
 
 /* ══════════════ 상태 ══════════════ */
 const S = {
@@ -340,7 +341,7 @@ function sysPrompt(){
 
 /* ══════════════ API (GAS 릴레이) ══════════════ */
 async function callAI(){
-  const r=await fetch(S.cfg.gasUrl,{
+  const r=await fetch(GAS_URL,{
     method:'POST',
     headers:{'Content-Type':'text/plain;charset=utf-8'},  // preflight 회피
     body:JSON.stringify({action:'chat',system:sysPrompt(),messages:S.history.slice(-20)})
@@ -396,7 +397,7 @@ async function askAI(){
     logToSheet();
   }catch(e){
     tp.remove();
-    addMsg('sys','연결에 문제가 있어요 😢 부모님께 설정(⚙️)의 GAS 주소를 확인해 달라고 말해줘! ('+e.message+')');
+    addMsg('sys','연결에 문제가 있어요 😢 잠시 후 다시 시도해줘! ('+e.message+')');
   }
   S.busy=false;
 }
@@ -543,9 +544,9 @@ function renderDash(){
 
 /* ══════════════ 학습 기록 → 구글 시트 (부모 브리핑용) ══════════════ */
 function logToSheet(){
-  if(!S.cfg||!S.cfg.gasUrl) return;
+  if(!S.cfg) return;
   const today=S.records.filter(r=>new Date(r.d).toDateString()===new Date().toDateString());
-  fetch(S.cfg.gasUrl,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
+  fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
     body:JSON.stringify({action:'log',name:S.cfg.name,parentEmail:S.cfg.parentEmail||'',subject:S.subject,unit:S.unit,mode:S.mode,
       todayOk:today.filter(r=>r.ok).length,todayAll:today.length,
       lastReason:(S.records.slice(-1)[0]||{}).reason||''})
@@ -556,11 +557,9 @@ function logToSheet(){
 function finishOnboard(){
   const name=document.getElementById('obName').value.trim();
   const interest=document.getElementById('obInterest').value.trim();
-  const gasUrl=document.getElementById('obGas').value.trim();
   const parentEmail=document.getElementById('obEmail').value.trim();
   if(!name||!interest){alert('이름과 관심사를 알려줘!');return;}
-  if(!gasUrl){alert('GAS 웹앱 URL이 필요해요. 부모님께 부탁해 주세요!');return;}
-  S.cfg={name,interest,gasUrl,parentEmail,bookUrl:''};
+  S.cfg={name,interest,parentEmail,bookUrl:''};
   localStorage.setItem('tutor_cfg',JSON.stringify(S.cfg));
   document.getElementById('mdOnboard').classList.remove('on');
   renderHome();
@@ -569,7 +568,6 @@ function openSettings(){
   if(!S.cfg) return;
   document.getElementById('stName').value=S.cfg.name;
   document.getElementById('stInterest').value=S.cfg.interest;
-  document.getElementById('stGas').value=S.cfg.gasUrl;
   document.getElementById('stEmail').value=S.cfg.parentEmail||'';
   document.getElementById('stBook').value=S.cfg.bookUrl||'';
   document.getElementById('mdSettings').classList.add('on');
@@ -577,7 +575,6 @@ function openSettings(){
 function saveSettings(){
   S.cfg.name=document.getElementById('stName').value.trim();
   S.cfg.interest=document.getElementById('stInterest').value.trim();
-  S.cfg.gasUrl=document.getElementById('stGas').value.trim();
   S.cfg.parentEmail=document.getElementById('stEmail').value.trim();
   S.cfg.bookUrl=document.getElementById('stBook').value.trim();
   localStorage.setItem('tutor_cfg',JSON.stringify(S.cfg));
