@@ -313,10 +313,11 @@ function sysPrompt(){
 2. 초6이 아는 어휘만 쓴다. 한 번에 3~4문장, 짧게 말하고 아이의 반응을 기다린다.
 3. 아이가 맞히면 구체적으로 칭찬하고, 틀리면 절대 혼내지 않고 "좋아, 거의 다 왔어!"처럼 격려한다.
 4. 아이가 어려워하면(틀림이 반복되면) 난이도를 한 단계 낮추고, 필요하면 이전 학년(5학년 이하) 뿌리 개념까지 내려가 구멍을 메운다.
-5. 이모지를 적절히 써서 친근하게, 그러나 수업의 긴장감은 유지한다.`;
+5. 이모지를 적절히 써서 친근하게, 그러나 수업의 긴장감은 유지한다.
+6. 마크다운 문법 절대 금지: **, ##, ###, 표, 코드블록, 번호·글머리 목록을 쓰지 마라. 채팅하듯 자연스러운 문장으로만 말하라. 강조하고 싶으면 이모지나 따옴표를 써라.`;
 
   if(S.subject==='수학' && moneyCtx){
-    p+=`\n6. [돈의 언어 연계] 문제와 비유를 만들 때 돈 상황(${moneyCtx})을 우선 활용하라. 수학이 곧 돈의 언어임을 자연스럽게 느끼게 하라.`;
+    p+=`\n7. [돈의 언어 연계] 문제와 비유를 만들 때 돈 상황(${moneyCtx})을 우선 활용하라. 수학이 곧 돈의 언어임을 자연스럽게 느끼게 하라.`;
   }
 
   const modeRules={
@@ -364,7 +365,7 @@ function addMsg(role,text,imgSrc){
       verdict=`<span class="verdict ${m[1]==='정답'?'ok':'no'}">${m[1]==='정답'?'⭕ 정답!':'❌ 다시 도전!'}</span><br>`;
       text=text.replace(/<<판정:[^>]*>>/g,'').trim();
     }
-    div.innerHTML=`<div class="who">👨‍🏫 일타쌤</div>${verdict}${esc(text)}`;
+    div.innerHTML=`<div class="who">👨‍🏫 일타쌤</div>${verdict}${fmt(text)}`;
   }else{
     div.textContent=text;
     if(imgSrc){const im=document.createElement('img');im.src=imgSrc;div.appendChild(im);}
@@ -373,6 +374,16 @@ function addMsg(role,text,imgSrc){
   chatEl().scrollTop=chatEl().scrollHeight;
 }
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')}
+/* AI 답변용: 마크다운 기호 정리 (굵게→<b>, 헤더·글머리 기호 제거) */
+function fmt(s){
+  s=s.replace(/^#{1,4}\s*/gm,'')            // ## 헤더 제거
+     .replace(/^\s*[-*]\s+/gm,'• ')         // - 목록 → •
+     .replace(/`([^`]+)`/g,'$1');            // 인라인 코드 제거
+  s=esc(s);
+  s=s.replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>') // **굵게**
+     .replace(/\*([^*<>]+)\*/g,'$1');           // *기울임* 기호 제거
+  return s;
+}
 
 async function sendMsg(text){
   const input=document.getElementById('msgInput');
