@@ -3,577 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>하준이의 지구 탐험대 🌍</title>
-<!-- SNS 공유 썸네일 -->
-<meta property="og:title" content="하준이의 지구 탐험대 🌍">
-<meta property="og:description" content="적도·위도·경도·북반구·남반구·본초자오선, 설명 듣고 바로 문제 풀기!">
-<meta property="og:image" content="https://jsh0529-beep.github.io/study/cover.png">
-<meta property="og:url" content="https://jsh0529-beep.github.io/study/">
+<title>AI 1타강사 — 초6 전과목 AI 과외 | 《돈의 언어》 공식</title>
+<meta name="description" content="과외선생님보다 쉽게 가르치는 초등 6학년 전과목 AI 과외. 하브루타 거꾸로 설명, 시험지 사진 분석, 부모 주간 브리핑까지.">
+
+<!-- 카톡·페북·스레드 공유 미리보기 (OG) -->
 <meta property="og:type" content="website">
-<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<meta property="og:title" content="AI 1타강사 — 과외쌤보다 쉬운 초6 전과목 AI 과외">
+<meta property="og:description" content="개념·문제풀이·하브루타·시험지 사진 분석·부모 브리핑까지. 《돈의 언어》 저자가 직접 만든 AI 과외 선생님 🧑‍🏫">
+<meta property="og:image" content="https://jsh0529-beep.github.io/study/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://jsh0529-beep.github.io/study/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --sky:#EAF6FF; --ocean:#1E6FB8; --ocean-light:#4FA3E3; --land:#58B368;
-  --navy:#14375A; --sun:#FFC93C; --coral:#FF7B54; --white:#FFFFFF;
+  --green:#1B5E43;--green-deep:#123F2D;--gold:#E8B33C;--paper:#FBF8F0;
+  --ink:#22271F;--line:#E3DCC9;--coral:#E4573D;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Gowun Dodum',sans-serif;background:linear-gradient(180deg,#D9EFFF 0%,#EAF6FF 60%,#F5FBFF 100%);color:var(--navy);min-height:100vh}
-h1,h2,h3,.jua{font-family:'Jua',sans-serif}
-.wrap{max-width:760px;margin:0 auto;padding:20px 16px 60px}
-header{padding:8px 0 4px}
-.cover{border:3px solid var(--navy);border-radius:22px;overflow:hidden;box-shadow:0 6px 0 rgba(20,55,90,.15);line-height:0}
-.cover svg{width:100%;height:auto;display:block}
-.tabs{display:flex;gap:8px;justify-content:center;margin:20px 0;flex-wrap:wrap}
-.tab-btn{font-family:'Jua',sans-serif;font-size:1rem;padding:10px 18px;border:3px solid var(--navy);border-radius:999px;background:var(--white);color:var(--navy);cursor:pointer;transition:.15s}
-.tab-btn.active{background:var(--sun);transform:translateY(-2px);box-shadow:0 4px 0 var(--navy)}
-.card{background:var(--white);border:3px solid var(--navy);border-radius:22px;padding:22px;margin-bottom:18px;box-shadow:0 6px 0 rgba(20,55,90,.15)}
-.quiz-info{background:#EFFAF1;border:2px solid var(--land);border-radius:14px;padding:14px;margin-bottom:14px;line-height:1.7}
-.reward-table{width:100%;border-collapse:collapse;margin-top:10px}
-.reward-table th,.reward-table td{border:2px solid var(--navy);padding:9px 8px;text-align:center;font-size:.95rem}
-.reward-table th{background:var(--sun);font-family:'Jua',sans-serif}
-.reward-table tr.good td{background:#EFFAF1}
-.reward-table tr.retry td{background:#FFF0EC}
-.start-btn,.next-btn,.retry-btn{display:block;width:100%;font-family:'Jua',sans-serif;font-size:1.2rem;padding:14px;border:3px solid var(--navy);border-radius:16px;background:var(--sun);cursor:pointer;box-shadow:0 5px 0 var(--navy);transition:.12s;color:var(--navy)}
-.start-btn:active,.next-btn:active,.retry-btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--navy)}
-.progress{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.progress .bar{flex:1;height:14px;background:#DCEBFA;border:2px solid var(--navy);border-radius:999px;overflow:hidden}
-.progress .fill{height:100%;background:var(--land);width:0%;transition:.3s}
-.progress .label{font-family:'Jua',sans-serif;font-size:.92rem;white-space:nowrap}
-/* 설명(레슨) 화면 */
-.lesson-badge{display:inline-block;font-family:'Jua',sans-serif;background:var(--ocean-light);color:#fff;border:2px solid var(--navy);border-radius:999px;padding:6px 16px;font-size:.95rem;margin-bottom:10px}
-.lesson h2{font-size:1.6rem;margin-bottom:10px}
-.big-say{background:#FFF6DC;border:3px dashed var(--sun);border-radius:16px;padding:16px;font-size:1.15rem;line-height:1.9;margin:12px 0}
-.point-line{display:flex;gap:10px;align-items:flex-start;background:#F5FAFF;border:2px solid #C7D9EA;border-radius:12px;padding:10px 14px;margin:8px 0;font-size:1.05rem;line-height:1.7}
-.point-line .ic{flex:0 0 auto;font-size:1.3rem}
-.globe-box{display:flex;justify-content:center;margin:14px 0}
-/* 문제 화면 */
-.q-text{font-family:'Jua',sans-serif;font-size:1.3rem;line-height:1.55;margin-bottom:16px}
-.opts{display:grid;gap:10px}
-.opt{font-size:1.05rem;text-align:left;padding:14px 16px;border:2px solid var(--navy);border-radius:14px;background:#F5FAFF;cursor:pointer;transition:.12s;font-family:'Gowun Dodum',sans-serif;color:var(--navy)}
-.opt:hover{background:#E3F1FF}
-.opt.correct{background:#C9F0D2;border-color:var(--land);font-weight:bold}
-.opt.wrong{background:#FFD9CC;border-color:var(--coral)}
-.opt:disabled{cursor:default}
-.feedback{margin-top:14px;padding:12px 14px;border-radius:12px;font-size:1.02rem;line-height:1.7;display:none}
-.feedback.show{display:block}
-.feedback.ok{background:#EFFAF1;border:2px solid var(--land)}
-.feedback.no{background:#FFF0EC;border:2px solid var(--coral)}
-.hidden{display:none}
-.score-big{font-family:'Jua',sans-serif;font-size:3.4rem;text-align:center;margin:8px 0}
-.score-msg{text-align:center;font-size:1.15rem;line-height:1.7}
-.reward-banner{margin:18px 0;padding:18px;border-radius:18px;border:3px solid var(--navy);text-align:center;font-family:'Jua',sans-serif;font-size:1.3rem;line-height:1.6}
-.reward-banner.tier1{background:#C9F0D2}
-.reward-banner.tier2{background:#FFF1BF}
-.reward-banner.tier3{background:#DCEBFA}
-.reward-banner.tier4{background:#FFE1D6}
-.stars{text-align:center;font-size:2rem;letter-spacing:6px;margin-bottom:6px}
-.review{margin-top:16px}
-.review-item{border:2px solid #C7D9EA;border-radius:12px;padding:10px 12px;margin-bottom:8px;font-size:.93rem;line-height:1.6}
-.review-item.wrong-item{border-color:var(--coral);background:#FFF7F4}
-/* 마지막 미션 */
-.tip-card{display:flex;gap:12px;align-items:flex-start;background:#F5FAFF;border:2px solid var(--navy);border-radius:14px;padding:12px 14px;margin-bottom:10px;line-height:1.65;font-size:.98rem}
-.tip-num{flex:0 0 auto;font-family:'Jua',sans-serif;width:34px;height:34px;border-radius:50%;background:var(--sun);border:2px solid var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
-.script-card{border:2px solid var(--navy);border-radius:14px;margin-bottom:10px;overflow:hidden}
-.script-card>button{width:100%;text-align:left;font-family:'Jua',sans-serif;font-size:1.05rem;padding:12px 16px;background:#FFF1BF;border:none;cursor:pointer;color:var(--navy)}
-.script-body{display:none;padding:14px 16px;background:#FFFDF4;line-height:1.8;font-size:.98rem;border-top:2px dashed var(--navy)}
-.script-card.open .script-body{display:block}
-.script-body .bubble{background:#EAF6FF;border:2px solid var(--ocean-light);border-radius:14px;padding:10px 14px;margin:6px 0}
-.stamp-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:2px solid var(--navy);border-radius:14px;padding:10px 14px;margin-bottom:8px;background:#F5FAFF}
-.stamp-row .nm{font-size:.98rem}
-.stamp-btn{flex:0 0 auto;font-family:'Jua',sans-serif;width:64px;height:64px;border-radius:50%;border:3px dashed var(--navy);background:#fff;cursor:pointer;font-size:.8rem;color:#6C8AA6;transition:.15s}
-.stamp-btn.stamped{border-style:solid;border-color:var(--coral);background:#FFE1D6;color:var(--coral);font-size:1.7rem;transform:rotate(-12deg)}
-footer{text-align:center;font-size:.85rem;color:#6C8AA6;margin-top:30px}
-@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
-@media(max-width:480px){.q-text{font-size:1.12rem}.big-say{font-size:1.05rem}}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.jua{font-family:'Jua',sans-serif;font-weight:400}
+a{text-decoration:none;color:inherit}
+.container{max-width:560px;margin:0 auto;padding:0 20px}
+
+/* 히어로: 칠판 */
+.hero{background:linear-gradient(160deg,var(--green) 0%,var(--green-deep) 100%);color:#fff;padding:52px 0 46px;position:relative;overflow:hidden}
+.hero::after{content:"₩";position:absolute;right:-20px;bottom:-70px;font-size:230px;font-family:'Jua';color:rgba(255,255,255,.06);pointer-events:none}
+.hero .badge{display:inline-block;background:var(--gold);color:var(--green-deep);border-radius:20px;padding:5px 14px;font-size:13px;font-weight:900;margin-bottom:16px}
+.hero h1{font-size:44px;line-height:1.15;margin-bottom:14px}
+.hero h1 .gold{color:var(--gold)}
+.hero p{font-size:17px;opacity:.92;margin-bottom:26px}
+.cta{display:block;text-align:center;background:var(--gold);color:var(--green-deep);border-radius:16px;padding:17px;font-size:19px;font-weight:900;box-shadow:0 6px 18px rgba(0,0,0,.25);transition:transform .1s}
+.cta:active{transform:scale(.98)}
+.cta small{display:block;font-size:12px;font-weight:500;opacity:.75;margin-top:2px}
+
+/* 기능 */
+.feats{padding:40px 0 8px}
+.sec-h{font-size:24px;color:var(--green-deep);margin-bottom:6px}
+.sec-sub{font-size:14px;color:#8b8779;margin-bottom:20px}
+.feat{display:flex;gap:14px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 3px 10px rgba(27,94,67,.07)}
+.feat .ic{font-size:28px;flex-shrink:0}
+.feat b{font-size:16px;color:var(--green-deep)}
+.feat p{font-size:13.5px;color:#6b675c;margin-top:2px}
+.feat.hl{border:1.5px solid var(--gold);background:linear-gradient(135deg,#FFFDF6,#FDF3D8)}
+.feat.hl .tag{display:inline-block;background:var(--gold);color:var(--green-deep);font-size:11px;font-weight:900;border-radius:8px;padding:1px 8px;margin-left:6px;vertical-align:2px}
+
+/* 흐름 */
+.how{padding:32px 0}
+.how ol{list-style:none;counter-reset:s}
+.how li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;font-size:15px}
+.how li::before{content:counter(s);font-family:'Jua';flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+
+/* 책 */
+.book{display:flex;gap:16px;align-items:center;background:#fff;border:1.5px solid var(--gold);border-radius:16px;padding:18px;margin:8px 0 36px}
+.book .cover{width:60px;height:84px;border-radius:6px;background:linear-gradient(160deg,var(--gold),#C98F1E);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Jua';font-size:13px;text-align:center;line-height:1.3;flex-shrink:0;box-shadow:0 4px 10px rgba(201,143,30,.35)}
+.book b{font-size:15px}.book p{font-size:12.5px;color:#7d7a6f;margin-top:3px}
+
+.bottom-cta{padding:0 0 40px}
+footer{background:var(--green-deep);color:rgba(255,255,255,.65);text-align:center;font-size:12px;padding:22px 20px}
+@media (max-width:380px){.hero h1{font-size:37px}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <div class="cover">
-    <svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="하준이의 지구 탐험대 커버">
-      <defs>
-        <radialGradient id="csky" cx="50%" cy="30%" r="90%">
-          <stop offset="0%" stop-color="#1B3B6F"/><stop offset="55%" stop-color="#122A52"/><stop offset="100%" stop-color="#0A1B38"/>
-        </radialGradient>
-        <radialGradient id="cglobe" cx="35%" cy="30%" r="80%">
-          <stop offset="0%" stop-color="#7FC3F2"/><stop offset="60%" stop-color="#4FA3E3"/><stop offset="100%" stop-color="#2A72B5"/>
-        </radialGradient>
-      </defs>
-      <rect width="1200" height="630" fill="url(#csky)"/>
-      <g fill="#FFFFFF">
-        <circle cx="90" cy="80" r="3" opacity=".9"/><circle cx="200" cy="150" r="2" opacity=".6"/>
-        <circle cx="150" cy="420" r="2.5" opacity=".8"/><circle cx="320" cy="60" r="2" opacity=".7"/>
-        <circle cx="60" cy="280" r="2" opacity=".5"/><circle cx="1120" cy="90" r="3" opacity=".9"/>
-        <circle cx="1040" cy="200" r="2" opacity=".6"/><circle cx="1150" cy="350" r="2.5" opacity=".8"/>
-        <circle cx="980" cy="70" r="2" opacity=".5"/><circle cx="1100" cy="520" r="2" opacity=".7"/>
-        <circle cx="250" cy="540" r="2" opacity=".6"/><circle cx="420" cy="90" r="2" opacity=".5"/>
-      </g>
-      <g fill="#FFC93C">
-        <path d="M 130 200 l 5 12 12 5 -12 5 -5 12 -5 -12 -12 -5 12 -5 z" opacity=".95"/>
-        <path d="M 1070 430 l 4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4 z" opacity=".9"/>
-        <path d="M 300 330 l 3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z" opacity=".8"/>
-      </g>
-      <g transform="translate(880,315)">
-        <ellipse rx="270" ry="80" fill="none" stroke="#FFC93C" stroke-width="4" opacity=".55" transform="rotate(-18)"/>
-        <circle r="205" fill="url(#cglobe)" stroke="#0A1B38" stroke-width="7"/>
-        <ellipse cx="-70" cy="-75" rx="72" ry="48" fill="#58B368"/>
-        <ellipse cx="62" cy="-25" rx="44" ry="66" fill="#58B368"/>
-        <ellipse cx="-42" cy="88" rx="58" ry="36" fill="#58B368"/>
-        <ellipse cx="110" cy="105" rx="36" ry="24" fill="#58B368"/>
-        <line x1="-168" y1="-118" x2="168" y2="-118" stroke="#0E4E86" stroke-width="3" stroke-dasharray="10 8" opacity=".7"/>
-        <line x1="-192" y1="-62" x2="192" y2="-62" stroke="#0E4E86" stroke-width="3" stroke-dasharray="10 8" opacity=".7"/>
-        <line x1="-192" y1="62" x2="192" y2="62" stroke="#0E4E86" stroke-width="3" stroke-dasharray="10 8" opacity=".7"/>
-        <line x1="-168" y1="118" x2="168" y2="118" stroke="#0E4E86" stroke-width="3" stroke-dasharray="10 8" opacity=".7"/>
-        <ellipse rx="130" ry="205" fill="none" stroke="#0E4E86" stroke-width="3" stroke-dasharray="10 8" opacity=".7"/>
-        <ellipse rx="60" ry="205" fill="none" stroke="#0E4E86" stroke-width="3" stroke-dasharray="10 8" opacity=".7"/>
-        <line x1="-205" y1="0" x2="205" y2="0" stroke="#E84545" stroke-width="9"/>
-        <line x1="0" y1="-205" x2="0" y2="205" stroke="#8A63FF" stroke-width="9"/>
-        <g transform="translate(232,0)">
-          <rect y="-22" width="86" height="44" rx="22" fill="#E84545"/>
-          <text x="43" y="10" font-family="Jua, sans-serif" font-size="26" fill="#FFF" text-anchor="middle">적도</text>
-        </g>
-        <g transform="translate(0,-248)">
-          <rect x="-88" y="-22" width="176" height="44" rx="22" fill="#8A63FF"/>
-          <text y="10" font-family="Jua, sans-serif" font-size="24" fill="#FFF" text-anchor="middle">본초자오선</text>
-        </g>
-        <ellipse cx="-88" cy="-102" rx="52" ry="30" fill="#FFF" opacity=".28" transform="rotate(-28 -88 -102)"/>
-      </g>
-      <g transform="translate(560,120) rotate(35)">
-        <path d="M0 -42 C 16 -22, 16 14, 0 34 C -16 14, -16 -22, 0 -42 Z" fill="#FFF" stroke="#0A1B38" stroke-width="4"/>
-        <circle cy="-8" r="8" fill="#4FA3E3" stroke="#0A1B38" stroke-width="3"/>
-        <path d="M -12 12 L -24 34 L -10 28 Z" fill="#E84545" stroke="#0A1B38" stroke-width="3"/>
-        <path d="M 12 12 L 24 34 L 10 28 Z" fill="#E84545" stroke="#0A1B38" stroke-width="3"/>
-        <path d="M -6 36 Q 0 58 6 36 Z" fill="#FFC93C"/>
-      </g>
-      <g font-family="Jua, sans-serif">
-        <text x="80" y="235" font-size="34" fill="#FFC93C" letter-spacing="6">초등 6학년 사회 · 세계 지리</text>
-        <text x="76" y="330" font-size="82" fill="#FFFFFF">하준이의</text>
-        <text x="76" y="430" font-size="96" fill="#FFC93C">지구 탐험대</text>
-        <text x="80" y="500" font-size="30" fill="#BFD9F2">적도 · 위도 · 경도 · 북반구 · 남반구 · 본초자오선</text>
-        <g transform="translate(80,532)">
-          <rect width="300" height="56" rx="28" fill="#58B368" stroke="#0A1B38" stroke-width="4"/>
-          <text x="150" y="38" font-size="28" fill="#FFF" text-anchor="middle">도전! 10문제 퀴즈</text>
-        </g>
-      </g>
-    </svg>
-  </div>
-</header>
 
-<div class="tabs">
-  <button class="tab-btn active" id="tabQuiz" onclick="showTab('quiz')">🚀 배우고 바로 풀기</button>
-  <button class="tab-btn" id="tabMission" onclick="showTab('mission')">🎤 마지막 미션</button>
-</div>
-
-<!-- ============ 배우고 바로 풀기 ============ -->
-<section id="quiz">
-  <div class="card" id="quizIntro">
-    <h2 class="jua" style="font-size:1.4rem;margin-bottom:10px">🚀 배우고 바로 풀기!</h2>
-    <div class="quiz-info">
-      이렇게 진행돼! <b>쉬운 설명 → 바로 그 문제 2개</b> → 다음 설명 → 또 문제 2개...<br>
-      방금 배운 걸 바로 풀어서 <b>머리에 콕콕</b> 박히게 하는 거야! 🧠<br>
-      총 <b>5개 설명 + 10문제</b>, 한 문제에 <b>10점</b>이야.
-    </div>
-    <h3 class="jua" style="margin:14px 0 6px">🏆 점수별 약속</h3>
-    <table class="reward-table">
-      <tr><th>점수</th><th>결과</th></tr>
-      <tr class="good"><td>90점 이상</td><td>🚲 자전거 2시간!</td></tr>
-      <tr class="good"><td>80 ~ 89점</td><td>👊 펀치 5번!</td></tr>
-      <tr class="good"><td>70 ~ 79점</td><td>💰 용돈 2,000원!</td></tr>
-      <tr class="retry"><td>70점 미만</td><td>📚 다시 복습하고 재도전!</td></tr>
-    </table>
-    <br>
-    <button class="start-btn" onclick="startFlow()">🚀 출발!</button>
-  </div>
-
-  <!-- 설명 화면 -->
-  <div class="card hidden" id="lessonCard">
-    <div class="progress">
-      <div class="bar"><div class="fill" id="progFill1"></div></div>
-      <div class="label" id="progLabel1"></div>
-    </div>
-    <div class="lesson" id="lessonBody"></div>
-    <br>
-    <button class="next-btn" onclick="afterLesson()">✏️ 좋아! 방금 배운 거 문제 풀기</button>
-  </div>
-
-  <!-- 문제 화면 -->
-  <div class="card hidden" id="quizPlay">
-    <div class="progress">
-      <div class="bar"><div class="fill" id="progFill2"></div></div>
-      <div class="label" id="progLabel2"></div>
-    </div>
-    <div class="q-text" id="qText"></div>
-    <div class="opts" id="qOpts"></div>
-    <div class="feedback" id="qFeedback"></div>
-    <br>
-    <button class="next-btn hidden" id="nextBtn" onclick="nextStep()">다음 ▶</button>
-  </div>
-
-  <!-- 결과 화면 -->
-  <div class="card hidden" id="quizResult">
-    <div class="stars" id="resStars"></div>
-    <div class="score-big" id="resScore"></div>
-    <div class="score-msg" id="resMsg"></div>
-    <div class="reward-banner" id="resReward"></div>
-    <div class="review" id="resReview"></div>
-    <button class="retry-btn" onclick="resetQuiz()">🔄 다시 도전하기</button>
-    <br>
-    <button class="start-btn" onclick="showTab('mission')">🎤 마지막 미션! 엄마에게 설명하러 가기</button>
+<section class="hero">
+  <div class="container">
+    <span class="badge">《돈의 언어》 공식 학습 파트너</span>
+    <h1 class="jua">AI <span class="gold">1타강사</span></h1>
+    <p>과외선생님보다 쉽게 가르치는<br><b>초등 6학년 전과목 AI 과외</b></p>
+    <a class="cta jua" href="app.html">무료로 수업 시작하기 🚀<small>설치 없이 바로 · 국어 수학 사회 과학 영어</small></a>
   </div>
 </section>
 
-<!-- ============ 마지막 미션: 엄마에게 설명하기 ============ -->
-<section id="mission" class="hidden">
-  <div class="card">
-    <h2 class="jua" style="font-size:1.45rem;margin-bottom:8px">🎤 마지막 미션: 엄마에게 멋지게 설명하기!</h2>
-    <div class="quiz-info">
-      진짜 지구 박사는 <b>남에게 설명할 수 있는 사람</b>이야!<br>
-      아래 <b>비법 3단계</b>대로 엄마에게 설명하고, 엄마가 도장을 눌러 주면 미션 성공! 🏅
-    </div>
+<section class="feats">
+  <div class="container">
+    <h2 class="sec-h jua">진짜 과외쌤이 하는 일, 전부 합니다</h2>
+    <p class="sec-sub">정답만 알려주는 AI가 아니라, 스스로 깨닫게 이끄는 선생님</p>
 
-    <h3 class="jua" style="margin:16px 0 8px">🪄 멋지게 설명하는 비법 3단계</h3>
-    <div class="tip-card"><span class="tip-num">1</span><div><b>비유로 시작하기</b><br>"엄마, 지구가 큰 수박이라고 생각해 봐!" 처럼 <b>엄마가 아는 물건</b>에 빗대서 시작하면 귀가 쫑긋! 👂</div></div>
-    <div class="tip-card"><span class="tip-num">2</span><div><b>그리면서 설명하기</b><br>종이에 동그라미(지구)를 그리고, 가로선·세로선을 <b>직접 그으면서</b> 설명해. 손으로 보여주면 두 배로 멋있어! ✏️</div></div>
-    <div class="tip-card"><span class="tip-num">3</span><div><b>거꾸로 퀴즈 내기</b><br>설명이 끝나면 "엄마, 그럼 문제 낼게! 위도 0°인 선은 뭐~게?" 하고 <b>엄마에게 문제를 내 봐</b>. 선생님이 된 기분! 👨‍🏫</div></div>
-
-    <h3 class="jua" style="margin:20px 0 8px">💬 이렇게 말해 봐! (설명 대본 카드)</h3>
-    <p style="font-size:.92rem;color:#3D6285;margin-bottom:10px">카드를 누르면 대본이 열려요. 몇 번 읽어 보고, 나중엔 안 보고 말해 보자!</p>
-    <div id="scriptCards"></div>
-
-    <h3 class="jua" style="margin:22px 0 8px">✅ 엄마 확인 도장판</h3>
-    <p style="font-size:.92rem;color:#3D6285;margin-bottom:10px">하준이가 설명을 잘 마치면, 엄마가 직접 도장을 눌러 주세요!</p>
-    <div id="stampBoard"></div>
-    <div id="missionDone" class="reward-banner tier1 hidden" style="margin-top:16px">
-      🏆 <b>미션 올 클리어!</b><br>하준이는 이제 진짜 지구 박사! 축하해! 🎉
-    </div>
+    <div class="feat hl"><div class="ic">🔄</div><div><b>내가 선생님! 하브루타 모드<span class="tag">국내 유일</span></b><p>AI 동생 '도리'에게 아이가 직접 설명하며 가르쳐요. 설명할 수 있어야 진짜 아는 것 — 메타인지가 자랍니다.</p></div></div>
+    <div class="feat"><div class="ic">💡</div><div><b>3단계 소크라테스 티칭</b><p>비유 → 쉬운 예제 → 힌트 순서로, 정답을 바로 알려주지 않고 스스로 풀게 만듭니다. 아이 관심사(축구·게임·아이돌)로 비유해서 설명해요.</p></div></div>
+    <div class="feat"><div class="ic">🔍</div><div><b>틀린 '이유'까지 진단</b><p>개념 오해인지, 계산 실수인지, 문제를 잘못 읽었는지 구분하고 — 같은 이유로 3번 틀리면 5학년 뿌리 개념까지 내려가 구멍을 메웁니다.</p></div></div>
+    <div class="feat"><div class="ic">📷</div><div><b>시험지 사진 분석</b><p>학교 단원평가지를 찍어 올리면 오답을 찾아 진단하고 비슷한 연습 문제를 만들어줍니다.</p></div></div>
+    <div class="feat"><div class="ic">💰</div><div><b>수학 × 돈의 언어</b><p>비와 비율은 할인율로, 분수는 용돈 나누기로. 수학을 배우며 경제 감각이 함께 자랍니다.</p></div></div>
+    <div class="feat"><div class="ic">📊</div><div><b>부모 주간 브리핑</b><p>매주 일요일, 이번 주 학습 내용·잘한 점·보완할 점을 정리해 이메일로 보내드립니다.</p></div></div>
   </div>
 </section>
 
-<footer>초등학교 6학년 사회 · 세계 여러 나라의 자연과 문화 단원</footer>
-</div>
+<section class="how">
+  <div class="container">
+    <h2 class="sec-h jua">시작은 30초</h2>
+    <ol style="margin-top:14px">
+      <li>아이 이름과 좋아하는 것을 알려주세요</li>
+      <li>과목과 단원을 고르면 일타쌤이 인사해요</li>
+      <li>대화하며 배우고, 틀리면 힌트로 다시 도전!</li>
+    </ol>
+  </div>
+</section>
+
+<section class="container">
+  <a class="book" id="bookLink" href="#" target="_blank" rel="noopener">
+    <div class="cover">돈의<br>언어</div>
+    <div><b>《국영수보다 먼저 가르쳐야 할 돈의 언어》</b>
+    <p>이 앱을 만든 저자의 책. 우리 아이 첫 경제교육, 부모님이 먼저 읽어보세요 →</p></div>
+  </a>
+</section>
+
+<section class="bottom-cta">
+  <div class="container">
+    <a class="cta jua" href="app.html">일타쌤 만나러 가기 🧑‍🏫<small>초6 전과목 · 무료</small></a>
+  </div>
+</section>
+
+<footer>AI 1타강사 · made by 《돈의 언어》 저자<br>© 2026 All rights reserved</footer>
 
 <script>
-/* ---------- 지구본 SVG 생성 ---------- */
-function globeSVG(opts){
-  const o=Object.assign({equator:false,latitudes:false,longitudes:false,meridian:false,north:false,south:false,size:250},opts||{});
-  const s=o.size,c=s/2,r=s/2-14;
-  let inner='';
-  inner+='<circle cx="'+c+'" cy="'+c+'" r="'+r+'" fill="#4FA3E3" stroke="#14375A" stroke-width="3"/>';
-  inner+='<ellipse cx="'+(c-r*0.35)+'" cy="'+(c-r*0.35)+'" rx="'+(r*0.32)+'" ry="'+(r*0.22)+'" fill="#58B368"/>';
-  inner+='<ellipse cx="'+(c+r*0.30)+'" cy="'+(c-r*0.1)+'" rx="'+(r*0.2)+'" ry="'+(r*0.3)+'" fill="#58B368"/>';
-  inner+='<ellipse cx="'+(c-r*0.2)+'" cy="'+(c+r*0.42)+'" rx="'+(r*0.26)+'" ry="'+(r*0.16)+'" fill="#58B368"/>';
-  if(o.north) inner+='<path d="M '+(c-r)+','+c+' A '+r+','+r+' 0 0 1 '+(c+r)+','+c+' Z" fill="#FFC93C" opacity="0.45"/>';
-  if(o.south) inner+='<path d="M '+(c-r)+','+c+' A '+r+','+r+' 0 0 0 '+(c+r)+','+c+' Z" fill="#7C4DFF" opacity="0.35"/>';
-  if(o.latitudes){
-    [-0.66,-0.33,0.33,0.66].forEach(function(k){
-      const y=c+r*k, half=Math.sqrt(r*r-(r*k)*(r*k));
-      inner+='<line x1="'+(c-half)+'" y1="'+y+'" x2="'+(c+half)+'" y2="'+y+'" stroke="#0E4E86" stroke-width="2" stroke-dasharray="6 5" opacity="0.85"/>';
-    });
-  }
-  if(o.longitudes){
-    [0.33,0.66].forEach(function(k){
-      inner+='<ellipse cx="'+c+'" cy="'+c+'" rx="'+(r*k)+'" ry="'+r+'" fill="none" stroke="#0E4E86" stroke-width="2" stroke-dasharray="6 5" opacity="0.85"/>';
-    });
-    inner+='<line x1="'+c+'" y1="'+(c-r)+'" x2="'+c+'" y2="'+(c+r)+'" stroke="#0E4E86" stroke-width="2" stroke-dasharray="6 5" opacity="0.5"/>';
-  }
-  if(o.equator){
-    inner+='<line x1="'+(c-r)+'" y1="'+c+'" x2="'+(c+r)+'" y2="'+c+'" stroke="#E84545" stroke-width="5"/>';
-    inner+='<rect x="'+(c+r-2)+'" y="'+(c-13)+'" width="52" height="26" rx="13" fill="#E84545"/>';
-    inner+='<text x="'+(c+r+24)+'" y="'+(c+5)+'" font-size="14" fill="#fff" text-anchor="middle" font-family="Jua">적도</text>';
-  }
-  if(o.meridian){
-    inner+='<line x1="'+c+'" y1="'+(c-r)+'" x2="'+c+'" y2="'+(c+r)+'" stroke="#7C4DFF" stroke-width="5"/>';
-    inner+='<rect x="'+(c-45)+'" y="'+(c-r-30)+'" width="90" height="24" rx="12" fill="#7C4DFF"/>';
-    inner+='<text x="'+c+'" y="'+(c-r-13)+'" font-size="13" fill="#fff" text-anchor="middle" font-family="Jua">본초자오선</text>';
-  }
-  if(o.north) inner+='<text x="'+c+'" y="'+(c-r*0.45)+'" font-size="17" text-anchor="middle" font-family="Jua" fill="#14375A">북반구 ⬆</text>';
-  if(o.south) inner+='<text x="'+c+'" y="'+(c+r*0.55)+'" font-size="17" text-anchor="middle" font-family="Jua" fill="#14375A">남반구 ⬇</text>';
-  return '<svg width="'+(s+70)+'" height="'+(s+40)+'" viewBox="-10 -35 '+(s+70)+' '+(s+40)+'" role="img">'+inner+'</svg>';
-}
-
-/* ---------- 레슨(아주 쉬운 설명) + 문제 데이터 ---------- */
-const lessons=[
- {
-  emoji:'🔴', title:'적도',
-  say:'지구가 커다란 <b>수박</b>이라고 생각해 봐!<br>수박 <b>배꼽(허리)</b>을 빙 두른 빨간 줄, 그게 바로 <b>적도</b>야!',
-  points:[
-   '➡️ 적도는 지구 <b>한가운데를 가로로</b> 지나는 선이야.',
-   '0️⃣ 적도의 위도는 <b>0도</b>! 여기서부터 재기 시작해.',
-   '🔥 적도 근처는 햇빛을 제일 많이 받아서 <b>일 년 내내 더워</b>!'
-  ],
-  globe:{equator:true},
-  qs:[
-   {q:'지구 한가운데를 가로로 지나는, 지구의 허리띠 같은 선은?',
-    opts:['본초자오선','적도','경선','날짜변경선'],a:1,
-    exp:'딩동댕! 수박 허리의 빨간 줄 = 적도!'},
-   {q:'적도의 위도는 몇 도(°)일까?',
-    opts:['90도','100도','0도','180도'],a:2,
-    exp:'적도는 위도를 재는 출발점이라서 0도야!'}
-  ]
- },
- {
-  emoji:'📏', title:'위도',
-  say:'우리 아파트에서 "<b>나 5층 살아!</b>" 하면 위치를 알 수 있지?<br><b>위도</b>는 지구의 <b>층수</b>야! 적도가 <b>0층</b>이고, 위·아래로 갈수록 숫자가 커져!',
-  points:[
-   '➖ 적도랑 나란한 <b>가로선</b>을 <b>위선</b>이라고 불러.',
-   '🔢 적도가 0도, 북극·남극이 90도. 그래서 위도는 <b>0도~90도</b>까지!',
-   '⬆️ 적도보다 위면 <b>북위</b>, ⬇️ 아래면 <b>남위</b>. 서울은 북위 37도쯤!'
-  ],
-  globe:{equator:true,latitudes:true},
-  qs:[
-   {q:'적도와 나란하게 그은 가로선의 이름은?',
-    opts:['경선','자오선','위선','수평선'],a:2,
-    exp:'가로선 = 위선! "위도를 알려주는 선"이라고 기억하자.'},
-   {q:'위도는 몇 도부터 몇 도까지 있을까?',
-    opts:['0° ~ 90°','0° ~ 180°','0° ~ 360°','0° ~ 100°'],a:0,
-    exp:'적도가 0도, 북극·남극이 90도니까 0°~90°!'}
-  ]
- },
- {
-  emoji:'📐', title:'경도',
-  say:'이번엔 수박의 <b>세로 줄무늬</b>를 봐!<br>북극에서 남극까지 <b>세로로</b> 그은 선이 <b>경선</b>, 그 위치 숫자가 <b>경도</b>야!',
-  points:[
-   '｜ 북극~남극을 잇는 <b>세로선</b> = <b>경선</b>!',
-   '🔢 경도는 <b>0도~180도</b>까지 있어. (위도보다 2배 커!)',
-   '⏰ 경도가 다르면 <b>시간도 달라</b>! 그래서 미국은 우리랑 밤낮이 반대야.'
-  ],
-  globe:{meridian:true,longitudes:true},
-  qs:[
-   {q:'북극과 남극을 세로로 잇는 선의 이름은?',
-    opts:['위선','적도','경선','지평선'],a:2,
-    exp:'세로선 = 경선! 수박 줄무늬를 떠올려!'},
-   {q:'경도는 몇 도부터 몇 도까지 있을까?',
-    opts:['0° ~ 90°','0° ~ 180°','0° ~ 360°','0° ~ 45°'],a:1,
-    exp:'경도는 0°~180°! 위도(90°)의 딱 2배라고 기억하면 쉬워.'}
-  ]
- },
- {
-  emoji:'🌗', title:'북반구와 남반구',
-  say:'사과를 <b>가로로 반</b> 자르면? 윗조각, 아랫조각!<br>지구도 적도로 자르면 <b>위쪽 = 북반구</b>, <b>아래쪽 = 남반구</b>야!',
-  points:[
-   '⬆️ 우리나라, 중국, 미국은 <b>북반구</b>!',
-   '⬇️ 호주, 뉴질랜드는 <b>남반구</b>!',
-   '🔄 북반구와 남반구는 <b>계절이 반대</b>! 호주 크리스마스는 한여름이야! 🎅🩳'
-  ],
-  globe:{equator:true,north:true,south:true},
-  qs:[
-   {q:'우리나라(대한민국)는 어느 반구에 있을까?',
-    opts:['남반구','북반구','서반구에만 있다','적도 위에 있다'],a:1,
-    exp:'우리나라는 적도보다 위(북쪽)! 그래서 북반구야.'},
-   {q:'북반구가 여름일 때, 남반구(호주)의 계절은?',
-    opts:['여름','봄','겨울','가을'],a:2,
-    exp:'계절이 반대! 그래서 호주 산타는 반바지를 입을지도? 🎅'}
-  ]
- },
- {
-  emoji:'💜', title:'본초자오선',
-  say:'달리기 시합엔 <b>출발선</b>이 필요하지?<br>경도를 재는 출발선이 바로 <b>본초자오선</b>이야! <b>경도 0도</b>!',
-  points:[
-   '🏁 본초자오선 = <b>경도 0도</b>인 세로선!',
-   '🇬🇧 <b>영국</b> 런던의 <b>그리니치 천문대</b>를 지나가!',
-   '🌓 이 선을 기준으로 지구가 <b>동반구·서반구</b>로 나뉘어.'
-  ],
-  globe:{meridian:true,equator:true},
-  qs:[
-   {q:'경도 0°인 기준선(경도의 출발선)의 이름은?',
-    opts:['본초자오선','적도','북회귀선','위선'],a:0,
-    exp:'경도의 출발선 = 본초자오선! 위도의 출발선은 적도!'},
-   {q:'본초자오선이 지나가는 그리니치 천문대가 있는 나라는?',
-    opts:['프랑스','영국','미국','독일'],a:1,
-    exp:'영국 런던의 그리니치 천문대! 세계 시간의 기준이 되는 곳이야.'}
-  ]
- }
-];
-
-/* ---------- 진행 흐름: 설명 → 문제2개 → 설명 → 문제2개 ... ---------- */
-let li=0, qi=0, score=0, answered=false, wrongList=[];
-const TOTAL_Q=10;
-
-function showTab(t){
-  document.getElementById('quiz').classList.toggle('hidden',t!=='quiz');
-  document.getElementById('mission').classList.toggle('hidden',t!=='mission');
-  document.getElementById('tabQuiz').classList.toggle('active',t==='quiz');
-  document.getElementById('tabMission').classList.toggle('active',t==='mission');
-}
-
-function startFlow(){
-  li=0;qi=0;score=0;wrongList=[];
-  document.getElementById('quizIntro').classList.add('hidden');
-  document.getElementById('quizResult').classList.add('hidden');
-  showLesson();
-}
-
-function doneCount(){ return li*2+qi; }
-
-function showLesson(){
-  document.getElementById('quizPlay').classList.add('hidden');
-  const card=document.getElementById('lessonCard');
-  card.classList.remove('hidden');
-  const L=lessons[li];
-  document.getElementById('progLabel1').textContent='설명 '+(li+1)+' / 5';
-  document.getElementById('progFill1').style.width=(doneCount()/TOTAL_Q*100)+'%';
-  document.getElementById('lessonBody').innerHTML=
-   '<span class="lesson-badge">'+(li+1)+'번째 이야기</span>'+
-   '<h2>'+L.emoji+' '+L.title+'</h2>'+
-   '<div class="big-say">🧒 '+L.say+'</div>'+
-   '<div class="globe-box">'+globeSVG(L.globe)+'</div>'+
-   L.points.map(function(p){return '<div class="point-line"><span class="ic">✔️</span><div>'+p+'</div></div>';}).join('');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function afterLesson(){
-  document.getElementById('lessonCard').classList.add('hidden');
-  qi=0;
-  showQuestion();
-}
-
-function showQuestion(){
-  answered=false;
-  document.getElementById('quizPlay').classList.remove('hidden');
-  const L=lessons[li], q=L.qs[qi], num=doneCount()+1;
-  document.getElementById('progLabel2').textContent='문제 '+num+' / '+TOTAL_Q+' · '+L.emoji+' '+L.title;
-  document.getElementById('progFill2').style.width=((num-1)/TOTAL_Q*100)+'%';
-  document.getElementById('qText').textContent='Q'+num+'. '+q.q;
-  const box=document.getElementById('qOpts');box.innerHTML='';
-  q.opts.forEach(function(op,i){
-    const b=document.createElement('button');
-    b.className='opt';b.textContent=['①','②','③','④'][i]+' '+op;
-    b.onclick=function(){choose(i,b);};
-    box.appendChild(b);
-  });
-  const fb=document.getElementById('qFeedback');
-  fb.className='feedback';fb.textContent='';
-  document.getElementById('nextBtn').classList.add('hidden');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function choose(i,btn){
-  if(answered)return;answered=true;
-  const q=lessons[li].qs[qi];
-  const opts=document.querySelectorAll('.opt');
-  opts.forEach(function(o){o.disabled=true;});
-  const fb=document.getElementById('qFeedback');
-  if(i===q.a){
-    score+=10;btn.classList.add('correct');
-    fb.className='feedback show ok';
-    fb.innerHTML='⭕ <b>정답이야! +10점</b><br>'+q.exp;
-  }else{
-    btn.classList.add('wrong');opts[q.a].classList.add('correct');
-    fb.className='feedback show no';
-    fb.innerHTML='❌ <b>아쉽다!</b> 정답은 「'+q.opts[q.a]+'」<br>'+q.exp;
-    wrongList.push(q);
-  }
-  const nb=document.getElementById('nextBtn');
-  const isLast=(li===lessons.length-1 && qi===lessons[li].qs.length-1);
-  nb.textContent=isLast?'🏁 결과 보기':(qi===lessons[li].qs.length-1?'📖 다음 이야기 배우러 가기':'다음 문제 ▶');
-  nb.classList.remove('hidden');
-}
-
-function nextStep(){
-  qi++;
-  if(qi<lessons[li].qs.length){ showQuestion(); return; }
-  li++; qi=0;
-  if(li<lessons.length){ document.getElementById('quizPlay').classList.add('hidden'); showLesson(); }
-  else{ showResult(); }
-}
-
-function showResult(){
-  document.getElementById('quizPlay').classList.add('hidden');
-  document.getElementById('lessonCard').classList.add('hidden');
-  const res=document.getElementById('quizResult');
-  res.classList.remove('hidden');
-  document.getElementById('resScore').textContent=score+'점';
-  const starCount=Math.max(1,Math.round(score/20));
-  document.getElementById('resStars').textContent='⭐'.repeat(starCount)+'☆'.repeat(5-starCount);
-
-  const banner=document.getElementById('resReward'), msg=document.getElementById('resMsg');
-  if(score>=90){
-    banner.className='reward-banner tier1';
-    banner.innerHTML='🚲 <b>자전거 2시간 획득!</b><br>지구 박사님 인정! 최고야 하준!';
-    msg.textContent='거의 다 맞혔어! 완벽에 가까운 실력이야 👏';
-  }else if(score>=80){
-    banner.className='reward-banner tier2';
-    banner.innerHTML='👊 <b>펀치 5번 획득!</b><br>아주 잘했어!';
-    msg.textContent='조금만 더 하면 90점도 문제없겠는걸? 💪';
-  }else if(score>=70){
-    banner.className='reward-banner tier3';
-    banner.innerHTML='💰 <b>용돈 2,000원 획득!</b><br>합격점이야!';
-    msg.textContent='좋았어! 틀린 문제만 다시 보면 점수가 쑥 올라갈 거야.';
-  }else{
-    banner.className='reward-banner tier4';
-    banner.innerHTML='📚 <b>다시 복습하고 재도전!</b><br>괜찮아, 틀리면서 배우는 거야!';
-    msg.textContent='아래 틀린 문제를 다시 읽어 보고 재도전해 보자!';
-  }
-
-  const rv=document.getElementById('resReview');
-  if(wrongList.length===0){
-    rv.innerHTML='<div class="review-item">🎉 틀린 문제가 하나도 없어! 대단해!</div>';
-  }else{
-    rv.innerHTML='<h3 class="jua" style="margin-bottom:8px">📝 틀린 문제 다시 보기</h3>'+
-      wrongList.map(function(q){return '<div class="review-item wrong-item"><b>Q. '+q.q+'</b><br>✅ 정답: '+q.opts[q.a]+'<br>💡 '+q.exp+'</div>';}).join('');
-  }
-  rv.insertAdjacentHTML('beforeend','<br>');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function resetQuiz(){
-  document.getElementById('quizResult').classList.add('hidden');
-  document.getElementById('quizIntro').classList.remove('hidden');
-}
-
-/* ---------- 마지막 미션: 설명 대본 ---------- */
-const scripts=[
- {t:'🔴 적도 설명하기',s:[
-  '엄마, 지구가 커다란 <b>수박</b>이라고 생각해 봐!',
-  '수박 허리를 딱 반으로 자르는 선이 있는데, 그게 바로 <b>적도</b>야.',
-  '적도는 지구에서 제일 뚱뚱한 부분이고, <b>위도 0도</b>야. 여기서부터 위도를 재기 시작해!',
-  '그래서 적도 근처 나라들은 일 년 내내 엄청 더워!']},
- {t:'📏 위도 설명하기',s:[
-  '엄마, 우리 아파트 <b>몇 층</b>인지 말하면 위치를 알 수 있잖아?',
-  '위도도 똑같아! 적도가 <b>0층(0도)</b>이고, 북극·남극 쪽으로 갈수록 숫자가 커져서 <b>90도</b>까지 있어.',
-  '적도보다 위면 <b>북위</b>, 아래면 <b>남위</b>라고 불러.',
-  '우리나라 서울은 북위 37도쯤이야. 지구 아파트 37층에 사는 셈이지!']},
- {t:'📐 경도 설명하기',s:[
-  '이번엔 수박의 <b>세로 줄무늬</b>를 봐, 엄마!',
-  '북극에서 남극까지 세로로 그은 선이 <b>경선</b>이고, 그 위치를 숫자로 나타낸 게 <b>경도</b>야.',
-  '경도는 본초자오선이 0도이고, 동쪽·서쪽으로 <b>180도</b>까지 있어.',
-  '경도가 다르면 <b>시간도 달라져</b>! 그래서 미국은 우리랑 낮과 밤이 반대야.']},
- {t:'🌗 북반구·남반구 설명하기',s:[
-  '엄마, 사과를 가로로 반 자르면 윗조각·아랫조각이 생기지?',
-  '지구도 적도로 자르면 위쪽이 <b>북반구</b>, 아래쪽이 <b>남반구</b>야.',
-  '우리나라는 북반구에 있고, 호주는 남반구에 있어.',
-  '신기한 건 계절이 <b>반대</b>라는 거야! 호주 산타는 반바지를 입을지도 몰라! 🎅🩳']},
- {t:'💜 본초자오선 설명하기',s:[
-  '엄마, 달리기 시합엔 <b>출발선</b>이 있어야 하잖아?',
-  '경도를 재는 출발선이 바로 <b>본초자오선</b>이야. 경도 0도!',
-  '세계 여러 나라가 회의해서 <b>영국 그리니치 천문대</b>를 지나는 선으로 정했어.',
-  '이 선을 기준으로 지구가 동반구와 서반구로 나뉘어!']}
-];
-
-const scBox=document.getElementById('scriptCards');
-scripts.forEach(function(sc){
-  const d=document.createElement('div');d.className='script-card';
-  d.innerHTML='<button onclick="this.parentElement.classList.toggle(\'open\')">'+sc.t+' ▾</button>'+
-   '<div class="script-body">'+sc.s.map(function(line){return '<div class="bubble">🗣️ '+line+'</div>';}).join('')+'</div>';
-  scBox.appendChild(d);
-});
-
-/* ---------- 엄마 확인 도장판 ---------- */
-const stampItems=['적도를 비유로 설명했어요','위도를 설명했어요','경도를 설명했어요','북반구·남반구를 설명했어요','본초자오선을 설명하고 엄마에게 퀴즈도 냈어요'];
-const stBox=document.getElementById('stampBoard');
-stampItems.forEach(function(nm,i){
-  const row=document.createElement('div');row.className='stamp-row';
-  row.innerHTML='<div class="nm">'+(i+1)+'. '+nm+'</div><button class="stamp-btn" id="stamp'+i+'" onclick="toggleStamp('+i+')">엄마<br>도장</button>';
-  stBox.appendChild(row);
-});
-function toggleStamp(i){
-  const b=document.getElementById('stamp'+i);
-  b.classList.toggle('stamped');
-  b.innerHTML=b.classList.contains('stamped')?'💮':'엄마<br>도장';
-  const all=stampItems.every(function(_,j){return document.getElementById('stamp'+j).classList.contains('stamped');});
-  document.getElementById('missionDone').classList.toggle('hidden',!all);
-}
+/* 책 링크: 앱 설정에 저장된 구매 링크가 있으면 자동 연결 */
+try{
+  var cfg=JSON.parse(localStorage.getItem('tutor_cfg')||'null');
+  if(cfg&&cfg.bookUrl) document.getElementById('bookLink').href=cfg.bookUrl;
+}catch(e){}
 </script>
 </body>
 </html>
